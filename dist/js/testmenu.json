@@ -1,0 +1,89 @@
+{
+  "button": [
+    {
+      "name": "驾驶员",
+      "sub_button": [
+        {
+          "type": "view",
+          "name": "保险",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/app/insurance.html"
+        },
+        {
+          "type": "view",
+          "name": "车检",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/app/review_preserve.html"
+        },
+        {
+          "type": "view",
+          "name": "车贷",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/api/wechat/wxCodeGetLoanCar"
+        },
+        {
+          "type": "view",
+          "name": "个人贷",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/app/driver_preserve.html"
+        },
+        {
+          "type": "view",
+          "name": "会员中心",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/api/wechat/wxGetCodeDriver"
+        }
+      ]
+    },
+    {
+      "name": "找货拉",
+      "sub_button": [
+        {
+          "type": "view",
+          "name": "找货",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/app/driver_order_list.html"
+        },
+        {
+          "type": "view",
+          "name": "找车",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/app/build_page.html"
+        },
+        {
+          "type": "view",
+          "name": "油卡充值",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/app/card_preserve.html"
+        },
+        {
+          "type": "view",
+          "name": "运费垫付",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/app/payment_preserve.html"
+        },
+        {
+          "type": "view",
+          "name": "调度登录",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/api/wechat/wxGetCodeDis"
+        }
+      ]
+    },
+    {
+      "name": "物流通",
+      "sub_button": [
+        {
+          "type": "view",
+          "name": "行业动态",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/api/wechat/wxCodeGetTrends"
+        },
+        {
+          "type": "view",
+          "name": "合作伙伴",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/api/wechat/wxCodeGetPartner"
+        },
+        {
+          "type": "view",
+          "name": "企业注册",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/api/wechat/wxCodeGetRegister"
+        },
+        {
+          "type": "view",
+          "name": "关于物流通",
+          "url": "http://zxkj.ngrok.xiaomiqiu.cn/api/wechat/wxGetCode"
+        }
+      ]
+    }
+  ]
+}

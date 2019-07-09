@@ -1,0 +1,900 @@
+.background-color-blue {
+    background-color: #679bf2
+}
+
+.background-color-grey {
+    background-color: #999999
+}
+
+.background-color-light_grey {
+    background-color: #dfdfdf
+}
+
+.background-color-red {
+    background-color: #eb3535
+}
+
+.red-font {
+    color: #eb3535
+}
+
+.green-font {
+    color: #19ad19
+}
+
+.blue-font {
+    color: #2487ff
+}
+
+.black-font {
+    color: #333333
+}
+
+.grey-font {
+    color: #999999
+}
+
+.font-fff {
+    color: #FFFFFF
+}
+
+.font-size {
+    font-size: 16px
+}
+
+.font-size20 {
+    font-size: 20px
+}
+
+.font-size22 {
+    font-size: 22px
+}
+
+.font-weight {
+    font-weight: bold
+}
+
+.btn-fixed {
+    position: fixed
+}
+
+.margin-bottom {
+    margin-bottom: 20px
+}
+
+.small-img {
+    width: 25px;
+    position: absolute;
+    padding: 10px 15px
+}
+
+.small-icon-img {
+    width: 25px
+}
+
+.telephone-img {
+    width: 15px;
+    margin-right: 10px
+}
+
+.left-icon {
+    margin-right: 10px
+}
+
+.padding-line {
+    padding-left: 35px
+}
+
+.padding-bottom {
+    padding: 10px 20px
+}
+
+.btn-rob-list {
+    background-color: #679bf2;
+    width: 29%;
+    border-width: 0;
+    margin-left: 72%;
+    line-height: 2.55555556;
+    border-radius: 5px;
+    color: #FFFFFF
+}
+
+.btn-rob-list-grey {
+    background-color: #999999;
+    width: 29%;
+    border-width: 0;
+    margin-left: 72%;
+    line-height: 2.55555556;
+    border-radius: 5px;
+    color: #FFFFFF
+}
+
+.shipment-date {
+    font-size: 15px;
+    color: #000
+}
+
+.solt-wrapper {
+    position: relative;
+    background-color: #FFFFFF
+}
+
+.solt-content {
+    width: 100%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center
+}
+
+.sort-font {
+    display: inline-block;
+    border-right: 1px solid #e5e4e4;
+    padding: 5px 40px
+}
+
+.sort-font-time {
+    border-right: none
+}
+
+.sort-img {
+    display: inline-block
+}
+
+.sort-img span {
+    font-size: 20px;
+    display: inline-block
+}
+
+.sort-img img {
+    width: 16px;
+    display: inline-block;
+    position: relative;
+    top: 2px
+}
+
+.modal-input {
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    width: 80%
+}
+
+.weui-dialog.weui-dialog--visible .weui-dialog__ft .weui-dialog__btn {
+    text-align: center;
+    background-color: #679bf2;
+    color: #FFFFFF
+}
+
+.weui-panel__hd:after {
+    left: 0
+}
+
+.weui-cell:before {
+    left: 0
+}
+
+.padding-bottom-navigation-bar {
+    padding-bottom: 60px
+}
+
+.personal_center {
+    font-size: 22px;
+    text-align: center
+}
+
+.verification-code {
+    background-color: #679bf2;
+    width: 90px;
+    border-width: 0;
+    margin-left: 30%;
+    line-height: 2.55555556;
+    color: #FFFFFF
+}
+
+.foot-timg {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    margin: 20px 0 70px 0
+}
+
+.foot-timg img {
+    width: 100%
+}
+
+.foot-timg p {
+    text-align: center;
+    line-height: 18px
+}
+
+.dispatch-waybill-btn {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 15px
+}
+
+.dispatch-waybill-btn .dispatch-btn-red {
+    background-color: #eb3535;
+    position: relative;
+    display: inline-block;
+    width: 100px
+}
+
+.dispatch-waybill-btn .dispatch-btn-blues {
+    background-color: #4395ff;
+    position: relative;
+    display: inline-block;
+    width: 100px
+}
+
+.dispatch-waybill-btn .dispatch-btn-green {
+    background-color: #19ad19;
+    position: relative;
+    display: inline-block;
+    width: 100px
+}
+
+.dispatch-waybill-btn .dispatch-btn-blue {
+    background-color: #679bf2;
+    position: relative;
+    display: inline-block;
+    width: 100px
+}
+
+.weui-panel .weui-panel__hd .car-start {
+    position: relative
+}
+
+.weui-panel .weui-panel__hd .car-start .car-id {
+    width: 70%;
+    height: 50px;
+    background-color: #c5d9fb;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #015ffa;
+    display: inline-block;
+    padding: 10px 0
+}
+
+.weui-panel__hd .btn-blues {
+    background-color: #4395ff;
+    width: 100%;
+    font-size: 14px;
+    position: absolute
+}
+
+.dispatch-cars-btn {
+    position: absolute;
+    width: 22%;
+    top: 30px;
+    right: 10px
+}
+
+.weui-panel__hd .btn-gray {
+    background-color: #999999
+}
+
+.personal-bg {
+}
+
+.personal-bg img {
+    width: 100%
+}
+
+.personal-tt {
+    position: absolute;
+    top: 62px;
+    left: 40px;
+    width: 85%
+}
+
+.personal-tt h5 {
+    color: #FFFFFF
+}
+
+.personal-tt p {
+    color: #FFFFFF;
+    margin-top: -7px
+}
+
+.personal-tt .gp-btn {
+    position: absolute;
+    margin-top: -40px;
+    right: 0
+}
+
+.personal-tt .gp-btn img {
+    width: 10px
+}
+
+.personal-img img {
+    width: 25px;
+    margin-right: 10px
+}
+
+.my-img-width {
+    width: 10px
+}
+
+.error {
+    color: #eb3535 !important
+}
+
+.weui-toast .weui_loading, .weui-toast .weui-toast_content {
+    text-align: center !important
+}
+
+.weui-toast .weui-toast_content {
+    color: #fff !important
+}
+
+.flex {
+    display: flex
+}
+
+.flex-label {
+    flex: 1
+}
+
+.flex-span {
+    flex: 9
+}
+
+.border-bottom-date {
+    border-bottom: 1px solid #f1f1f1;
+    left: 0;
+    right: 0
+}
+
+.dispatch-my-personal {
+    height: 28px;
+    text-align: center
+}
+
+.active {
+    background-color: #f2f2f2
+}
+
+.weui-actionsheet__title .weui-actionsheet__title-text {
+    text-align: center
+}
+
+.pad10 {
+    display: inline-block;
+    padding: 0 10px
+}
+
+.weui-popup__modal {
+    bottom: 60px
+}
+
+.foot-div {
+    position: relative;
+    top: 200px;
+    width: 100%;
+    display: inline-flex;
+    margin: 0 auto
+}
+
+.image-size {
+    width: 120px
+}
+
+.btn-insurance {
+    width: 50%;
+    height: 45px;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 45px;
+    position: relative;
+    margin: 25px auto;
+    color: #FFFFFF
+}
+
+.insurance-schedule {
+    width: 100%;
+    background-color: #FFFFFF;
+    padding: 10px 0
+}
+
+.insurance-schedule img {
+    width: 50px
+}
+
+.insurance-list-icon p {
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center
+}
+
+.insurance-list-icon {
+    text-align: center
+}
+
+.insurance-list-schedule {
+    width: 90%;
+    margin: 0 auto
+}
+
+.wire {
+    height: 0;
+    border: 1px dashed #999999;
+    position: relative;
+    margin-top: 8%
+}
+
+.progress-bar {
+    margin-top: 10px
+}
+
+.font-color-orange {
+    color: #FF9800
+}
+
+.margin-bottom-foot {
+    margin-bottom: 70px
+}
+
+.border-bottom-insurance {
+    width: 100px;
+    text-align: center;
+    margin: 0px auto;
+    border-bottom: .5px solid #999999;
+    margin-top: 12px;
+    padding-bottom: 1px
+}
+
+.add-car {
+    width: 80%;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: -1px 1px 15px #acabab;
+    margin-left: 10%
+}
+
+.font-size-center {
+    font-size: 22px;
+    font-weight: bold
+}
+
+.btn-img-insurance {
+    width: 25px;
+    display: inline-block;
+    vertical-align: middle
+}
+
+.insurance-margin {
+    margin-bottom: 10px;
+    margin-left: 5px
+}
+
+.gp-input-tt-orange {
+    border-left: 8px solid #ed8156 !important
+}
+
+.input-insurance-add-car {
+    width: 288px;
+    margin: 0px auto;
+    border-bottom: .5px solid #999999;
+    margin-top: 12px;
+    padding-bottom: 1px
+}
+
+.input-insurance-add-car input {
+    border: none;
+    height: 30px;
+    width: 150px;
+    color: #333333;
+    padding-left: 5px;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle
+}
+
+.insurance-my-list-width {
+    width: 90%;
+    margin-left: 5%;
+    padding-top: 10px
+}
+
+.insurance-my-address-padding {
+    padding: 0
+}
+
+.my-font-weight {
+    font-weight: bold
+}
+
+.agreement-text-indent {
+    line-height: 50px
+}
+
+.agreement-text-indent p {
+    font-size: 14px;
+    text-align: justify;
+    text-justify: inter-ideograph;
+    padding: 10px 0;
+    color: #333333
+}
+
+.agreement-text-indent-five {
+    text-indent: 50px
+}
+
+.div-null {
+    text-align: center;
+    padding: 80px 0
+}
+
+.img-null-width {
+    width: 80%
+}
+
+.gp-icon {
+    text-align: center;
+    position: relative
+}
+
+.gp-icon-img {
+    text-align: center;
+    display: inline-block;
+    margin: 10px 24px
+}
+
+.gp-icon-img img {
+    width: 50px
+}
+
+.gp-icon-img p {
+    font-size: 14px
+}
+
+.news {
+    position: relative;
+    margin-left: 10px;
+    padding: 5px;
+    width: 100%;
+    height: 20px
+}
+
+.news-img {
+    display: inline-block
+}
+
+.news-img img {
+    width: 16px;
+    vertical-align: super
+}
+
+.news-content {
+    display: inline-block;
+    width: 90%;
+    height: 23px;
+    overflow: hidden
+}
+
+.news-content ul {
+    position: relative
+}
+
+.news-content li {
+    font-size: 14px;
+    width: 85%;
+    margin-left: 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden
+}
+
+.ul-moveup {
+    animation: moveUp 4s 0.1s infinite;
+    -webkit-animation: moveUp 4s 0.1s infinite
+}
+
+@keyframes moveUp {
+    0% {
+        top: 0
+    }
+    10% {
+        top: -20%
+    }
+    20% {
+        top: -40%
+    }
+    30% {
+        top: -60%
+    }
+    40% {
+        top: -80%
+    }
+    50% {
+        top: -100%
+    }
+}
+
+.car-loan-banner {
+    line-height: 30px;
+    text-align: center;
+    padding: 15px 0
+}
+
+.car-loan-banner img {
+    width: 90px;
+    display: inline-block;
+    vertical-align: bottom
+}
+
+.car-loan-tt {
+    display: inline-block;
+    margin-left: 15px
+}
+
+.loan {
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    text-align: center
+}
+
+.loan-content {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    width: 40%;
+    position: relative;
+    padding: 10px 10px;
+    display: inline-block;
+    text-align: center
+}
+
+.loan-content-tt {
+    line-height: 15px
+}
+
+.loan-content img {
+    width: 45px;
+    display: inline-block;
+    vertical-align: bottom
+}
+
+.loan-content-tt {
+    display: inline-block;
+    text-align: center
+}
+
+.loan-content-tt h5 {
+    font-size: 14px;
+    text-align: center
+}
+
+.loan-content-tt p {
+    text-transform: uppercase
+}
+
+.car-loan-text-align {
+    text-align: right
+}
+
+.weui-form-preview__item {
+    overflow: inherit;
+    display: flex;
+}
+
+.schedule-item {
+    padding: 10px 10px 10px 30px;
+    margin-left: 20px;
+    border-left: 2px solid #c2c2c2;
+    position: relative
+}
+
+.schedule-item i {
+    position: absolute;
+    top: 12px;
+    left: -17px;
+    background-color: #fff
+}
+
+.schedule-top {
+    width: 30px;
+    height: 13px;
+    position: absolute;
+    top: -1px;
+    left: -18px;
+    display: inline-block;
+    background-color: #fff;
+    z-index: 9999
+}
+
+.schedule-bottom {
+    width: 30px;
+    height: 22px;
+    position: absolute;
+    top: 35px;
+    left: -18px;
+    display: inline-block;
+    background-color: #fff;
+    z-index: 9999
+}
+
+.loan-recommend-tt {
+    border-left: 8px solid #245ef6 !important
+}
+
+.loan-content-tt-left {
+    margin-left: 8px
+}
+
+.loan-insurance {
+    width: 85px !important
+}
+
+.loan-insurance-tt {
+    line-height: 15px;
+    margin-top: 20px !important
+}
+
+.loan-insurance-tt h5 {
+    font-size: 16px !important
+}
+
+.car-loan-limit-tt {
+    position: absolute;
+    top: 10px;
+    line-height: 40px;
+    color: #FFFFFF;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center
+}
+
+.car-loan-limit-tt p {
+    color: #FFFFFF;
+    font-size: 14px;
+    text-align: center
+}
+
+.car-loan-limit-tt h5 {
+    color: #FFFFFF;
+    font-size: 36px
+}
+
+.car-loan-remind {
+    font-size: 12px !important;
+    line-height: 0
+}
+
+.car-loan-remind img {
+    width: 15px;
+    vertical-align: middle;
+    margin-right: 5px
+}
+
+.car-loan-input {
+    height: 500px !important;
+    top: 140px !important
+}
+
+.car-loan-content {
+    font-size: 14px !important;
+    color: #999999 !important
+}
+
+.car-loan-repayment img {
+    width: 300px
+}
+
+.car-loan-repayment-tt {
+}
+
+.repayment-tt-top {
+    position: absolute;
+    top: 8px;
+    font-size: 12px;
+    color: #666666;
+    width: 85%;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+.repayment-tt-content {
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center
+}
+
+.repayment-tt-content p {
+    color: #333333
+}
+
+.repayment-tt-content h4 {
+    font-size: 28px
+}
+
+.idCard-border {
+    width: 100%;
+    height: 260px;
+    text-align: center
+}
+
+.idCard-img {
+    width: 96%;
+    height: 260px
+}
+
+.idCard-img-opacity {
+    opacity: 0.5
+}
+
+.idCard-title {
+    margin-top: 0;
+    margin-bottom: 5px
+}
+
+.insurance-index-icon img {
+    width: 65px !important
+}
+
+.insurance-claims img {
+    width: 200px !important;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 70px
+}
+
+.insurance-claims-tel {
+    width: 60% !important;
+    color: #FFFFFF !important;
+    font-size: 14px
+}
+
+.message-center-date {
+    width: 10%;
+    margin: auto
+}
+
+.date-width {
+    margin-left: 35%;
+    width: fit-content;
+    width: -moz-fit-content
+}
+
+.vertical-align {
+    vertical-align: middle !important
+}
+
+.padding {
+    padding: 30px 20px
+}
+
+.margt80 {
+    margin-top: 80px
+}
+
+.padding-left10 {
+    padding-left: 10px
+}
+
+.template-banner .new-banner-tt {
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    width: 100%;
+    top: 185px;
+    height: 50px
+}
+
+.new-banner-tt p {
+    font-size: 14px;
+    line-height: 50px;
+    text-align: center;
+    color: white
+}
+
+.weui-cell__bd {
+    display: inline
+}

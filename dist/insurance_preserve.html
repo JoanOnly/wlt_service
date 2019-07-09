@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>保险</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toIndex()" style="padding-bottom: 0">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font">
+            <p>进入首页</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+    <!--template-preserve-banner公共banner样式-->
+    <div class="template-preserve-banner">
+        <div class="template-preserve-content">
+            <div class="preserve-img">
+                <img src="img/insurance_preserve.png">
+            </div>
+            <div class="preserve-tt">
+                <h5>车险、货运险</h5>
+                <span>Insurance</span>
+                <div class="preserve-font-content">
+                    <div class="gp-preserve-font">
+                        <div class="font-content btn-indigo"></div>
+                        <p>在线投保</p>
+                    </div>
+                    <div class="gp-preserve-font">
+                        <div class="font-content btn-indigo"></div>
+                        <p>到期提醒</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="template-input">
+        <div class="gp-input-tt">
+            <span>车险</span>
+        </div>
+        <!--gp-input-content填写框-->
+        <form class="gp-input-content" id="saveOneForm">
+            <input type="hidden" name="openId" id="openId">
+            <input type="hidden" name="recordType" value="2">
+            <div class="gp-input">
+                <span>车牌号码</span>
+                <input type="text" placeholder="请输入车牌号码" name="carNumber">
+            </div>
+            <div class="gp-input">
+                <span>车主姓名</span>
+                <input type="text" placeholder="请输入车主姓名" name="carOwner">
+            </div>
+            <div class="gp-input">
+                <span>身份证号</span>
+                <input type="text" placeholder="请输入身份证号" name="carOwnerIdcard">
+            </div>
+            <div class="gp-input">
+                <span>联系电话</span>
+                <input type="text" placeholder="请输入联系电话" name="carOwnerPhone">
+            </div>
+        </form>
+        <!--确定按钮-->
+        <div class="input-btn btn-orange" id="inputOne">
+            <h5>提交</h5>
+        </div>
+        <!--foot-telephone400电话-->
+        <div class="foot-telephone">
+            <p>联系电话：400-808-4411</p>
+        </div>
+    </div>
+    <div class="template-input template-input-two padding-bottom-navigation-bar">
+        <div class="gp-input-tt gp-input-tt-blue">
+            <span>货运险</span>
+        </div>
+        <!--gp-input-content填写框-->
+        <form class="gp-input-content" id="saveTwoForm">
+            <input type="hidden" name="openId" id="openIdTwo">
+            <input type="hidden" name="recordType" value="2">
+            <div class="gp-input">
+                <span>车牌号码</span>
+                <input type="text" placeholder="请输入车牌号码" name="carNumber">
+            </div>
+            <div class="gp-input">
+                <span>车主姓名</span>
+                <input type="text" placeholder="请输入车主姓名" name="carOwner">
+            </div>
+            <div class="gp-input">
+                <span>身份证号</span>
+                <input type="text" placeholder="请输入身份证号" name="carOwnerIdcard">
+            </div>
+            <div class="gp-input">
+                <span>联系电话</span>
+                <input type="text" placeholder="请输入联系电话" name="carOwnerPhone">
+            </div>
+        </form>
+        <!--确定按钮-->
+        <div class="input-btn btn-indigo" id="inputTwo">
+            <h5>提交</h5>
+        </div>
+        <!--foot-telephone400电话-->
+        <div class="foot-telephone">
+            <p>联系电话：400-808-4411</p>
+        </div>
+    </div>
+    <!--底部菜单栏-->
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toIndex()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a onclick="toServiceList()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/product-list.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">产品</p>
+        </a>
+        <a onclick="toDriverMy()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+</body>
+<script>
+    $("#inputOne").click(function () {
+        $("#openId").val(store.get('openid'));
+        $.ajax({
+            type: "POST",                      //请求类型
+            url: config.SERVICE_PATH + "/wechat/saveOrderInfo",  //URL
+            data: $("#saveOneForm").serialize(),
+            dataType: 'json',
+            success: function (data) {
+                if (data.success) {
+                    toComplete();
+                } else {
+                    //openid或者access_token为空,-1 is Cannot get Jedis connection
+                    window.alert("系统繁忙，请退出公众号重试！" + data.code);
+                    toInsurance();
+                }
+            },
+            error: function (data) {
+                window.alert("系统繁忙，请稍后重试！" + data.code);
+                toInsurance();
+            }
+        });
+    });
+
+
+    $("#inputTwo").click(function () {
+        $("#openIdTwo").val(store.get('openid'));
+        $.ajax({
+            type: "POST",                      //请求类型
+            url: config.SERVICE_PATH + "/wechat/saveOrderInfo",  //URL
+            data: $("#saveTwoForm").serialize(),
+            dataType: 'json',
+            success: function (data) {
+                if (data.success) {
+                    toComplete();
+                } else {
+                    //openid或者access_token为空
+                    window.alert("系统繁忙，请退出公众号重试！" + data.code);
+                    toInsurance();
+                }
+            },
+            error: function (data) {
+                window.alert("系统繁忙，请稍后重试！" + data.code);
+                toInsurance();
+            }
+        });
+    });
+</script>
+</html>

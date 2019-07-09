@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>智慧物流通</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background底板色-->
+<div class="template-background padding-bottom-navigation-bar">
+    <!--banner图-->
+    <!-- 轮播图开始 -->
+    <div class="banner">
+        <div class="aui-banner-content " data-aui-slider>
+            <div class="aui-banner-wrapper">
+                <div class="aui-banner-wrapper-item">
+                    <a href="#">
+                        <img src="./img/bannerO.png">
+                    </a>
+                </div>
+                <div class="aui-banner-wrapper-item">
+                    <a href="#">
+                        <img src="./img/bannerT.png">
+                    </a>
+                </div>
+                <div class="aui-banner-wrapper-item">
+                    <a href="#">
+                        <img src="./img/bannerThree.png">
+                    </a>
+                </div>
+            </div>
+            <div class="aui-banner-pagination"></div>
+        </div>
+    </div>
+    <!-- 轮播图结束 -->
+
+    <div class="wrapper-icon">
+        <div class="content-icon">
+            <!--找货-->
+            <div class="icon">
+                <a href="driver_order_list.html">
+                    <img src="img/icon-one.png">
+                </a>
+            </div>
+            <!--找车-->
+            <div class="icon">
+                <a href="build_page.html">
+                    <img src="img/icon-two.png">
+                </a>
+            </div>
+            <!--调度-->
+            <div class="icon">
+                <a href="dispatch_login.html">
+                    <img src="img/icon-three.png">
+                </a>
+            </div>
+            <div class="icon">
+                <a href="payment_preserve.html">
+                    <img src="img/icon-four.png">
+                </a>
+            </div>
+            <div class="icon">
+                <a href="card_preserve.html">
+                    <img src="img/icon-five.png">
+                </a>
+            </div>
+            <div class="icon">
+                <a href="driver_preserve.html">
+                    <img src="img/icon-six.png">
+                </a>
+            </div>
+            <div class="icon">
+                <a href="insurance.html">
+                    <img src="img/icon-seven.png">
+                </a>
+            </div>
+            <div class="icon">
+                <a href="service_list.html">
+                    <img src="img/icon-eight.png">
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--wrapper-template模版-->
+    <div class="wrapper-template">
+        <div class="template-tt">
+            <p>全新服务</p>
+        </div>
+        <div class="content">
+            <div class="content-btn">
+                <a href="car_service.html">
+                    <img src="img/car-service.png">
+                </a>
+            </div>
+            <div class="content-btn">
+                <a href="car_business.html">
+                    <img src="img/selection-quality.png">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-template wrapper-template-two">
+        <div class="template-tt">
+            <p>热门产品</p>
+            <a href="service_list.html">更多</a>
+        </div>
+        <div class="gp" onclick="toAccount()">
+            <div class="gp-img">
+                <img src="img/payment.png">
+            </div>
+            <div class="gp-tt">
+                <h5>账户系统</h5>
+                <span>Account&nbsp;system</span>
+                <p>线上线下快速入账</p>
+            </div>
+            <div class="gp-btn">
+                <img src="img/gp-btn.png">
+            </div>
+        </div>
+        <div class="gp gp-two" onclick="toCompany()">
+            <div class="gp-img">
+                <img src="img/credit.png">
+            </div>
+            <div class="gp-tt">
+                <h5>企业授信</h5>
+                <span>Enterprise&nbsp;credit</span>
+                <p>快速评估征信、运费垫付</p>
+            </div>
+            <div class="gp-btn">
+                <img src="img/gp-btn.png">
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-template wrapper-template-two wrapper-template-three">
+        <div class="template-tt" onclick="toServiceList()">
+            <p>保障推荐</p>
+            <a href="service_list.html">更多</a>
+        </div>
+        <div class="gp-three-center">
+            <div class="gp-three" onclick="toReview()">
+                <div class="gp-three-img">
+                    <img src="img/inspection.png">
+                </div>
+                <div class="gp-three-tt">
+                    <h5>车辆检审</h5>
+                    <span>inspection</span>
+                    <p>操作简单</p>
+                </div>
+            </div>
+            <div class="gp-three" onclick="toCard()">
+                <div class="gp-three-img">
+                    <img src="img/card.png">
+                </div>
+                <div class="gp-three-tt">
+                    <h5>油卡服务</h5>
+                    <span>Oil&nbsp;card</span>
+                    <p>快速充值</p>
+                </div>
+            </div>
+            <div class="gp-three" onclick="toInsurance()">
+                <div class="gp-three-img">
+                    <img src="img/Insurance.png">
+                </div>
+                <div class="gp-three-tt">
+                    <h5>保险服务</h5>
+                    <span>Insurance</span>
+                    <p>在线投保</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="index-foot">
+        <img src="img/index-foot.png">
+    </div>
+    <!--底部菜单栏-->
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toIndex()" class="weui-tabbar__item weui-bar__item--on">
+            <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a onclick="toServiceList()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/product-list.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">产品</p>
+        </a>
+        <a onclick="toDriverMy()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+</body>
+<script>
+    //初始化页面获取openid并验证登录
+    $(function () {
+        // 获取微信的openid
+        let openid = config.getUrlParam(document.location, allParam.OPEN_ID);
+        // var openid = "opYI8wxYDnK_JAI1ZmS90mSdaPTA";
+        if (config.isEmpty(openid)) {
+            openid = store.get(allParam.OPEN_ID);
+            if (config.isEmpty(openid)) {
+                // openid = "opYI8wxYDnK_JAI1ZmS90mSdaPTA";
+                $.alert("微信openid获取失败！");
+            }
+        } else {
+            // store.set(allParam.OPEN_ID,"opYI8wxYDnK_JAI1ZmS90mSdaPTA");
+            store.set(allParam.OPEN_ID, openid);
+        }
+        isLogin();
+    });
+</script>
+
+<!--百度统计-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0d893f9d83e495d0180f59dbf5bdcb2a";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</html>

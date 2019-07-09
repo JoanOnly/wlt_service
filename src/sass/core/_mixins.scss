@@ -1,0 +1,146 @@
+@charset "UTF-8";
+/*
+  * Author: 云手
+  * GitHub: https://github.com/CloudHand233/ch233-not.included---
+  * LastUpdate: 2017.Aug.25th
+  * Version: 3.0.0
+*/
+
+/* element set
+   ========================================================================== */
+@mixin element-size($width:auto,$height:null,$position:relative,$display:block) { //默认相对定位并且块状化
+  width: $width;
+  height: $height;
+  position: $position;
+  display: $display;
+}
+
+@mixin element-space($margin:0 auto,$padding:null) {//盒模型边距
+  margin: $margin;
+  padding: $padding;
+}
+
+@mixin element-text($font-size:.7,$color:null,$text-align: left,$font-weight: null) {
+  font-size: $font-size * 1rem;
+  color: $color;
+  text-align: $text-align;
+  font-weight: $font-weight;
+}
+
+@mixin element-limit($minWidth:null,$maxWidth:null,$minHeight:null,$maxHeight:null) {//元素最大&最小极限
+  min-width: $minWidth;
+  max-width: $maxWidth;
+  min-height: $minHeight;
+  max-height: $maxHeight;
+}
+
+@mixin element-psi-absolute($top:auto, $right:null, $bottom:null, $left:null) {//position:absolute定位
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin element-psi-fixed($top:auto, $right:null, $bottom:null, $left:null) {//position:fixed定位
+  position: fixed;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin element-horizontally($RowHeight:1.75rem,$align:left) {//垂直居中
+  height: $RowHeight;
+  line-height: $RowHeight;
+  text-align: $align;
+}
+
+@mixin element-border($allBorder:null,$top:null,$right:null,$bottom:null,$left:null) { //添加 border
+  border: $allBorder;
+  border-top: $top;
+  border-right: $right;
+  border-bottom: $bottom;
+  border-left: $left;
+}
+
+@mixin element-image-size($width:auto,$height:null,$position:relative,$display:block) {
+  width: $width;
+  height: $height;
+  position: $position;
+  display: $display;
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+
+/* links
+   ========================================================================== */
+@mixin element-link($color:#000,$hover-decoration:none,$link-decoration:none,$hover-font-size:null,$link-font-size:null) {
+  a,a:link,a:visited {
+    color: rgba($color,.87);
+    text-decoration: $link-decoration;
+    font-size: $link-font-size;
+  }
+  a:hover {
+    color: rgba($color,1);
+    text-decoration: $hover-decoration;
+    font-size: $hover-font-size;
+  }
+}
+
+@mixin element-link-2color($color-1:#000,$color-2:#000,$color-1-alpha:.54,$color-2-alpha:.87,$hover-decoration:none,$link-decoration:none) {
+  a,a:link,a:visited {
+    color: rgba($color-1,$color-1-alpha);
+    text-decoration: $link-decoration;
+  }
+  a:hover {
+    color: rgba($color-2,$color-2-alpha);
+    text-decoration: $hover-decoration;
+  }
+}
+
+/* css3 & hack style
+   ========================================================================== */
+@mixin inline-block() {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin box-sizing($box-model:border-box) {
+  box-sizing:$box-model;
+  -moz-box-sizing:$box-model;
+  -webkit-box-sizing:$box-model;
+}
+
+@mixin background-size($bg-size:cover) {
+  -moz-background-size:$bg-size;
+  background-size:$bg-size;
+}
+
+@mixin box-shadow($xOffset:0,$yOffset:0,$blur:0,$spread:0,$color:#000000) {
+  //Firefox4.0- 投影方式 X轴偏移量 Y轴偏移量 阴影模糊半径 阴影扩展半径 阴影颜色
+  -moz-box-shadow:$xOffset $yOffset $blur $spread $color;
+  //Safariand Google chrome10.0- 投影方式 X轴偏移量 Y轴偏移量 阴影模糊半径 阴影扩展半径 阴影颜色
+  -webkit-box-shadow:$xOffset $yOffset $blur $spread $color;
+  //Firefox4.0+、 Google chrome 10.0+ 、 Opera10.5+ and IE9 投影方式 X轴偏移量 Y轴偏移量 阴影模糊半径 阴影扩展半径 阴影颜色
+  box-shadow:$xOffset $yOffset $blur $spread $color;
+}
+
+/* size set 以字符方式计量宽度，通常用于table、input、select、btn等需要使用大致字符宽度的元素
+   ========================================================================== */
+@for $i from 1 to 101 {
+  .character-#{$i} {
+    width: 1em*$i!important;
+  }
+}

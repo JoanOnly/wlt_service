@@ -1,0 +1,16 @@
+{
+  "name": "ch233-not-included",
+  "version": "3.0.0",
+  "description": "ch233",
+  "main": "gulpfile.js",
+  "scripts": {},
+  "author": "ch233",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "gulp": "^3.9.1",
+    "gulp-rev-append": "^0.1.8",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.4"
+  }
+}

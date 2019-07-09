@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>进度查询</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<div class="template-background">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toCarLoan()">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font">
+            <p>进入首页</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+
+    <div class="template-background padding-bottom-navigation-bar">
+        <!--车贷历史订单-->
+        <div class="weui-form-preview" id="loanSchedule"></div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">车贷进度</div>
+            </div>
+            <div class="weui-form-preview__bd">
+                <div class="weui-form-preview__item schedule-item">
+                    <span class="schedule-top"></span>
+                    <i class="weui-icon-success" id="pendingReview"></i>待审核
+                </div>
+                <div class="weui-form-preview__item schedule-item">
+                    <i class="weui-icon-circle" id="successfulReview"></i>审核成功
+                </div>
+                <div class="weui-form-preview__item schedule-item">
+                    <i class="weui-icon-warn" id="confirmLoan"></i>确认借款
+                    <span class="schedule-bottom"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部菜单栏-->
+<div class="weui-tabbar btn-fixed">
+    <a onclick="toCarLoan()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/index.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">主页</p>
+    </a>
+    <a onclick="toCarLoanRepayment()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/product-list.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">还款</p>
+    </a>
+    <a onclick="toCarLoanMy()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/driver-my.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">我的</p>
+    </a>
+</div>
+</body>
+<script>
+    $(function () {
+        getLoanSchedule();
+
+        function getLoanSchedule() {
+            let openid = store.get(allParam.OPEN_ID);
+            config.$ajax({
+                url: config.SERVICE_PATH + "/loanCar/getLoanSchedule",
+                method: config.GET,
+                data: {openId: openid},
+                datatype: 'json',
+                success: function (res) {
+                    if (res.success) {
+                        switch (res.data.loanStatus) {
+                            case 0:
+                                window.alert("审核失败");
+                                toCarLoan();
+                                break;
+                            case 4:
+                                $.toast("暂无进度", "forbidden");
+                                toCarLoan();
+                                break;
+                            case 2:
+                                $('#loanSchedule').append(template("loanDetail", res.data));
+                                $("#successfulReview").removeClass("weui-icon-circle");
+                                $("#successfulReview").addClass("weui-icon-success");
+                                break;
+                            case 3:
+                                $('#loanSchedule').append(template("loanDetail", res.data));
+                                $("#successfulReview").removeClass("weui-icon-circle");
+                                $("#successfulReview").addClass("weui-icon-success");
+                                $("#confirmLoan").removeClass("weui-icon-warn");
+                                $("#confirmLoan").addClass("weui-icon-success");
+                                break;
+                            default:
+                                $('#loanSchedule').append(template("loanDetail", res.data));
+                        } 
+                    } else {
+                        $.alert("您尚未申请贷款！", function () {
+                            window.location.href = "car_loan_limit.html";
+                        });
+                    }
+                },
+                error: function (data) {
+                    $.alert("系统繁忙,请稍后再试" + data.message);
+                }
+            })
+        }
+
+
+    })
+</script>
+<script id="loanDetail" type="text/html">
+    <div class="weui-form-preview__hd">
+        <label class="weui-form-preview__label">贷款金额</label>
+        <em class="weui-form-preview__value">{{loanAmount==null?"0":loanAmount}}</em>
+    </div>
+    <div class="weui-form-preview__bd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">用户姓名</label>
+            <span class="weui-form-preview__value car-loan-text-align">{{userName==null?" ":userName}}</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">身份证</label>
+            <span class="weui-form-preview__value car-loan-text-align">{{userIdCard}}</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">手机号</label>
+            <span class="weui-form-preview__value car-loan-text-align">{{userPhone}}</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">车辆品牌</label>
+            <span class="weui-form-preview__value car-loan-text-align">{{carBrand}}</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">车辆型号</label>
+            <span class="weui-form-preview__value car-loan-text-align">{{carVersion}}</span>
+        </div>
+    </div>
+    <div class="weui-form-preview__ft">
+        <a class="weui-form-preview__btn">客服电话：400-808-4411</a>
+    </div>
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>物流通_增值服务</title>
+</head>
+<body>
+
+<a href="javascript:;" id='show-alert' class="weui_btn weui_btn_primary">显示 Alert</a>
+
+<script>
+    let url = "/app/js/base.js";
+    let _v = new Date().getTime().toString();
+    document.write("<script src='" + url + "?_v=" + _v + "'><\/script>");
+</script>
+
+<script>
+    window.onload = function () {
+
+        $("body").append("<a href='javascript:;' class='weui-btn weui-btn_primary' id='btn1'>按钮1</a>");
+
+        console.log(config.GET);
+
+        $(document).on("click", "#show-alert", function () {
+            $.alert("AlphaGo 就是天网的前身，人类要完蛋了！", "警告！");
+        });
+
+        $("#btn1").on("click touchstart", function () {
+            $.alert("btn12");
+        });
+    }
+</script>
+</body>
+</html>

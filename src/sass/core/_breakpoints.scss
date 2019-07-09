@@ -1,0 +1,63 @@
+@charset "UTF-8";
+/*
+  * Author: 云手
+  * GitHub: https://github.com/CloudHand233/ch233-not.included---
+  * LastUpdate: 2017.Aug.25th
+  * Version: 3.0.0
+*/
+
+/*
+  how to use:
+  .className {
+    @include media-respond($breakpoints) {
+      ...
+    }
+  }
+ */
+
+/// $breakpoints - breakpoints set
+$breakpoints: (
+  // Small devices (landscape phones, 576px and up)
+  //'sm': (min-width: 576px, max-width: 767px),
+  'sm': (max-width: 767px),
+  // Medium devices (tablets, 768px and up)
+  'md': (min-width: 768px, max-width: 991px),
+  // Large devices (desktops, 992px and up)
+  'lg': (min-width: 992px, max-width: 1199px),
+  // Extra large devices (large desktops, 1200px and up)
+  'xl': (min-width: 1200px),
+);
+
+/// Media query merger
+/// Create a single media condition out of a map of queries
+/// @param {Map} $queries - Map of media queries
+@mixin media($queries) {
+  @if length($queries) == 0 {
+    @content;
+  } @else {
+    $first-key: nth(map-keys($queries), 1);
+    @media ($first-key: map-get($queries, $first-key)) {
+      $queries: map-remove($queries, $first-key);
+      @include media($queries) {
+        @content;
+      }
+    }
+  }
+}
+
+/// Responsive breakpoint manager
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin media-respond($breakpoint) {
+  // Get the query map for $breakpoints map
+  $queries: map-get($breakpoints, $breakpoint);
+  // If there is no query called $breakpoint in map, throw an error
+  @if not $queries {
+    @error "No value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+  // Include the media mixin with $queries
+  @include media($queries) {
+    @content;
+  }
+}

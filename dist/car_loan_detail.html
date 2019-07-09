@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>查看详情</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<div class="template-background padding-bottom-navigation-bar">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toCarLoan()">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font">
+            <p>进入首页</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+
+    <!--列表-->
+    <div id="car_loan_list"></div>
+
+</div>
+
+<!--底部菜单栏-->
+<div class="weui-tabbar btn-fixed">
+    <a onclick="toCarLoan()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/index.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">主页</p>
+    </a>
+    <a onclick="toCarLoanRepayment()" class="weui-tabbar__item weui-bar__item--on">
+        <div class="weui-tabbar__icon">
+            <img src="img/product-list.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">还款</p>
+    </a>
+    <a onclick="toCarLoanMy()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/driver-my.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">我的</p>
+    </a>
+</div>
+</body>
+<script id="car_loan_list_tpl" type="text/html">
+    {{each data}}
+    <div class="weui-form-preview {{$value.payStatus==1?'background-color-light_grey':''}}">
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">第{{$value.payPeriods}}期</label>
+                <span class="weui-form-preview__value car-loan-text-align grey-font">￥<label>{{$value.payEachAmount}}</label>(含利息<label>{{$value.payEachAmount}}</label>)</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">还款日期:&nbsp;&nbsp;{{$value.payGmt}}</label>
+                <span class="weui-form-preview__value car-loan-text-align grey-font">还款状态:&nbsp;&nbsp;{{$value.payStatus==1?"已还":"未还"}}</span>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+<script>
+    $.ajax({
+        url: config.SERVICE_PATH + "/loanCar/queryDetailList",  //URL
+        type: config.POST,
+        data: {openId: store.get(allParam.OPEN_ID), id: store.get(allParam.LOAN_CAR_ID)},
+        dataType: 'json',
+        success: function (res) {
+            if (res.success) {
+                carLoanIist(res);
+            } else {
+                $.alert("您当前没有记录！", function () {
+                    window.location.href = "car_loan_my.html";
+                });
+            }
+        }
+    });
+
+    function carLoanIist(data) {
+        let html = template("car_loan_list_tpl", data);
+        $('#car_loan_list').append(html);
+    }
+
+</script>
+</html>

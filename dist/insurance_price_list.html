@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>车险报价</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-return公共样式-->
+<div class="template-background">
+    <div class="template-return" onclick="toInsurance()">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font">
+            <p>进入首页</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+</div>
+
+<div class="template-background padding-bottom-navigation-bar">
+    <!--保单列表-->
+    <div id="price-list">
+
+    </div>
+</div>
+
+<!--底部菜单栏-->
+<div class="weui-tabbar btn-fixed">
+    <a onclick="toInsurance()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/index.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">主页</p>
+    </a>
+    <a onclick="toInsurancePriceList()" class="weui-tabbar__item weui-bar__item--on">
+        <div class="weui-tabbar__icon">
+            <img src="img/product-list.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">进度</p>
+    </a>
+    <a onclick="toInsuranceMy()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/driver-my.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">我的</p>
+    </a>
+</div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        //加载已支付的保险信息
+        queryInsuranceList();
+    });
+
+    //模板
+    function renderInsuranceList(data) {
+        let html = template("my_price_list", data);
+        $('#price-list').append(html);
+    }
+
+    //异步请求查询未支付的保险信息
+    function queryInsuranceList() {
+        config.$ajax({
+            url: config.SERVICE_PATH + "/insurance/queryAllInsuranceNoPay",  //URL
+            type: 'POST',
+            dataType: 'json',
+            success: function (result) {
+                console.log(result);
+                renderInsuranceList(result);
+            }
+        });
+    }
+</script>
+<script id="my_price_list" type="text/html">
+    {{if data.length == 0 }}
+    <div class="weui-panel div-null">
+        <img class="img-null-width" src="img/null.png">
+    </div>
+    <div class="weui-panel weui-panel_access" onclick="toInsuranceList()">
+        <button class="weui-btn add-btn btn-orange">立即投保</button>
+    </div>
+    {{else}}
+    {{each data}}
+    <div class="weui-form-preview" style="margin-bottom: 10px">
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">车主姓名：</label>
+                <span class="weui-form-preview__value car-loan-text-align">{{$value.insurerName}}</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">被保车辆：</label>
+                <span class="weui-form-preview__value car-loan-text-align">{{$value.carNumber}}</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">提交时间：</label>
+                <span class="weui-form-preview__value car-loan-text-align">{{$value.gmtCreate}}</span>
+            </div>
+        </div>
+        <div class="weui-form-preview__ft" onclick="toInsuranceEnquiry({{$value.id}},{{$value.insuranceStatus}})">
+            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary">查看保单进度</button>
+        </div>
+    </div>
+    {{/each}}
+    {{/if}}
+
+</script>
+</html>

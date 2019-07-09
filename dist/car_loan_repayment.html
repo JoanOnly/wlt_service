@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>快速还款</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background padding-bottom-navigation-bar">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toCarLoan()" style="padding-bottom: 0">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font">
+            <p>进入首页</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+    <!--template-preserve-banner公共banner样式-->
+    <div class="template-banner">
+        <img src="img/car-loan-repayment.png">
+        <div class="car-loan-limit-tt car-loan-repayment" style="top: 40px">
+            <img src="img/car-loan-repayment-img.png">
+            <!--当前账单-->
+            <div class="car-loan-repayment-tt" id="current_car_loan"></div>
+        </div>
+    </div>
+    <!--订单详情-->
+    <div class="weui-cells weui-panel" id="car_loan_info" style="margin-top: 55px"></div>
+    <!--订单还款记录-->
+    <div id="car_loan_history"></div>
+    <!--提交按钮-->
+    <div class="weui-panel weui-panel_access">
+        <button class="weui-btn btn-blue" id="confirm-btn">确认还款</button>
+    </div>
+    <!--底部菜单栏-->
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toCarLoan()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a onclick="toCarLoanRepayment()" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <img src="img/product-list.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">还款</p>
+        </a>
+        <a onclick="toCarLoanMy()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+</body>
+<!--当前账单-->
+<script id="current_car_loan_tpl" type="text/html">
+    <a class="gp-icon-img" href="car_loan_record.html">
+        <div class="repayment-tt-top">
+            <span>本期状态&nbsp;{{payStatus==0?"未还款":"已还款"}}</span>
+            <span style="float: right">最后还款日&nbsp;{{payGmt}}</span>
+        </div>
+        <div class="repayment-tt-content">
+            <p>本期应还</p>
+            <h4>¥{{payEachAmount}}</h4>
+        </div>
+    </a>
+</script>
+<!--订单详情-->
+<script id="car_loan_info_tpl" type="text/html">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label font-size">订单编号</label></div>
+        <div class="weui-cell__bd car-loan-text-align grey-font">
+            <span>{{loanId}}</span>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label font-size">订单状态</label></div>
+        <div class="weui-cell__bd car-loan-text-align grey-font">
+            <span>{{(loanStatus==3)?"还款中":loanStatus}}</span>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label font-size">剩余应还</label></div>
+        <div class="weui-cell__bd car-loan-text-align grey-font">
+            <span>¥{{payTotalAmount}}</span>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label font-size">剩余期数</label></div>
+        <div class="weui-cell__bd car-loan-text-align grey-font">
+            <span>{{periodsRest}}期</span>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label font-size">贷款金额</label></div>
+            <div class="weui-cell__bd car-loan-text-align grey-font">
+                <span>¥{{loanAmount}}</span>
+            </div>
+        </div>
+    </div>
+</script>
+<script>
+    let openid = store.get(allParam.OPEN_ID);
+    $.ajax({
+        url: config.SERVICE_PATH + "/loanCar/selectByOpenId",  //URL
+        type: config.POST,
+        data: {openid: openid},
+        dataType: 'json',
+        success: function (res) {
+            if (res.success) {
+                carLoanInfo(res.data.LoanCarInfo);
+                currentCarLoan(res.data.LoanCarDetail);
+            }
+            else {
+                $.alert("您当前名下没有正在还款的项目！", function () {
+                    window.location.href = "car_loan.html";
+                });
+            }
+        }
+    });
+
+    <!--订单详情-->
+    function carLoanInfo(data) {
+        let html = template("car_loan_info_tpl", data);
+        $('#car_loan_info').append(html);
+    }
+
+    <!--当前账单-->
+    function currentCarLoan(data) {
+        let html = template("current_car_loan_tpl", data);
+        $('#current_car_loan').append(html);
+    }
+
+    init();
+    function init() {
+        $("#confirm-btn").click(function () {
+            $.prompt({
+                title: '支付',
+                text: '支付金额',
+                input: '默认是本期应还',
+                empty: false, // 是否允许为空
+                onOK: function (input) {
+                    //点击确认
+                },
+                onCancel: function () {
+                    //点击取消
+                }
+            });
+        });
+
+    }
+</script>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>车辆绑定确认</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background">
+    <div class="template-return" onclick="toInsurance()">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font">
+            <p>进入首页</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+</div>
+<div class="template-background">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-media-box__bd car-loan-banner">
+            <h4 class="weui-media-box__title insurance-list-icon green-font">请您确认以下绑定信息</h4>
+            <p class="weui-media-box__desc insurance-list-icon green-font font-size">确认绑定后车辆信息会同步到您的微信号</p>
+        </div>
+    </div>
+    <form id="dataMatching">
+        <div class="weui-cells weui-panel">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" readonly placeholder="请输入姓名" name="ownerName" id="ownerName">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">身份证</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input regIDCard" readonly type="text" placeholder="请输入身份证" name="ownerIdentityId"
+                           id="ownerIdentityId">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">车牌号</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input regCarNumber" readonly type="text" placeholder="请输入车牌号" name="carNumber"
+                           id="carNumber">
+                </div>
+            </div>
+        </div>
+        <div class="weui-panel weui-panel_access">
+            <button class="weui-btn weui-btn_primary" id="submit">确认绑定</button>
+        </div>
+    </form>
+</div>
+<!--底部导航栏-->
+<div class="weui-tabbar btn-fixed">
+    <a onclick="toInsurance()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/index.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">主页</p>
+    </a>
+    <a onclick="toInsurancePriceList()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/product-list.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">进度</p>
+    </a>
+    <a onclick="toInsuranceMy()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/driver-my.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">我的</p>
+    </a>
+</div>
+</body>
+<script>
+    $(function () {
+        let id = store.get(allParam.ID);
+        let openId = store.get(allParam.OPEN_ID);
+        $.ajax({
+            type: "POST",                      //请求类型
+            url: config.SERVICE_PATH + "/transportCarInfo/selectTransportCarInfo",  //URL
+            data: {id: id},
+            dataType: 'json',
+            success: function (res) {
+                if (res.success) {
+                    $('#ownerName').val(res.data.ownerName);
+                    $('#ownerIdentityId').val(res.data.ownerIdentityId);
+                    $('#carNumber').val(res.data.carNumber);
+                }
+            },
+        });
+
+
+        $("#submit").on('click', function () {
+            //禁用按钮
+            $("#submit").attr("disabled", true);
+            $.ajax({
+                type: "POST",                      //请求类型
+                url: config.SERVICE_PATH + "/transportCarInfo/copyTransportCarInfo",  //URL
+                data: {
+                    transportCarInfoId: id,
+                    openId: openId
+                },
+                dataType: 'json',
+                success: function (res) {
+                    if (res.success) {
+                        $.toast("绑定成功");
+                        toInsuranceMyCar();
+                    } else {
+                        $.toast(res.msg, "cancel");
+                        $("#submit").attr("disabled", false);
+                    }
+                },
+                error: function (data) {
+                    $.toptip("系统繁忙，请稍后重试！" + data.message);
+                    $("#submit").attr("disabled", false);
+                }
+            });
+        });
+    });
+</script>
+</html>

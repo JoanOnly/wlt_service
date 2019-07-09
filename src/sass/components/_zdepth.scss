@@ -1,0 +1,85 @@
+@charset "UTF-8";
+/*
+  * Author: 云手
+  * GitHub: https://github.com/CloudHand233/ch233-not.included---
+  * LastUpdate: 2017.Aug.25th
+  * Version: 3.0.0
+*/
+
+/* import mixin ///$xOffset:0,$yOffset:0,$blur:0,$spread:0,$color
+   ========================================================================== */
+@import "../core/mixins";
+
+/* zdepth shadow ///Order: down(low) ---> up(height)
+   ========================================================================== */
+.elevation-1 {
+  @include box-shadow(0,.05rem,.15rem,0,rgba(0,0,0,.2));
+}
+.elevation-2 {
+  @include box-shadow(0,.05rem,.25rem,0,rgba(0,0,0,.2));
+}
+.elevation-3 {
+  @include box-shadow(0,.05rem,.4rem,0,rgba(0,0,0,.2));
+}
+.elevation-4 {
+  @include box-shadow(0,.05rem,.5rem,0,rgba(0,0,0,.2));
+}
+
+.elevation-6 {
+  @include box-shadow(0,.15rem,.25rem,0,rgba(0,0,0,.2));
+}
+.elevation-8 {
+  @include box-shadow(0,.2rem,.55rem,0,rgba(0,0,0,.2));
+}
+.elevation-9 {
+  @include box-shadow(0,.25rem,.3rem,0,rgba(0,0,0,.2));
+}
+
+.elevation-12 {
+  @include box-shadow(0,.35rem,.4rem,0,rgba(0,0,0,.2));
+}
+.elevation-16 {
+  @include box-shadow(0,.4rem,.5rem,0,rgba(0,0,0,.2));
+}
+.elevation-24 {
+  @include box-shadow(0,.55rem,.75rem,0,rgba(0,0,0,.2));
+}
+
+/* z-index ///Order: down(low) ---> up(height)
+   ========================================================================== */
+.zindex-fallback {
+  z-index: 9;
+}
+.zindex-1 {
+  z-index: 1000;
+}
+.zindex-2 {
+  z-index: 1020;
+}
+.zindex-3 {
+  z-index: 1040;
+}
+.zindex-4 {
+  z-index: 1060;
+}
+.zindex-6 {
+  z-index: 1080;
+}
+.zindex-8 {
+  z-index: 1100;
+}
+.zindex-9 {
+  z-index: 1120;
+}
+.zindex-12 {
+  z-index: 1140;
+}
+.zindex-16 {
+  z-index: 1160;
+}
+.zindex-24 {
+  z-index: 1180;
+}
+.zindex-alert {
+  z-index: 9999;
+}

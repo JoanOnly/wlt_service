@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>预估额度</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toCarLoan()" style="padding-bottom: 0">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font">
+            <p>进入首页</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+    <!--template-preserve-banner公共banner样式-->
+    <div class="template-banner" onclick="toPersonalCertification()">
+        <img src="img/car-loan-limit-banner.png">
+        <div class="car-loan-limit-tt" style="position: absolute;top: 10px;line-hight:10px;">
+            <p class="font-fff">最高可借额度（元）</p>
+            <h5 class="font-fff">300000.00</h5>
+            <p class="car-loan-remind"><img src="img/remind.png">实名认证可提高借款额度</p>
+        </div>
+    </div>
+    <div class="template-input car-loan-input padding-bottom-navigation-bar">
+        <div class="gp-input-tt loan-recommend-tt">
+            <span>资料填写</span>
+        </div>
+        <!--gp-input-content填写框-->
+        <form class="gp-input-content" id="saveOneForm">
+            <div class="gp-input">
+                <span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span>
+                <input type="text" name="userName" placeholder="请输入姓名">
+            </div>
+            <div class="gp-input">
+                <span>身&nbsp;&nbsp;份&nbsp;证</span>
+                <input type="text" class="regIDCard" name="userIdCard" placeholder="请输入身份证">
+            </div>
+            <div class="gp-input">
+                <span>手&nbsp;&nbsp;机&nbsp;号</span>
+                <input type="text" class="regPhone" name="userPhone" placeholder="请输入手机号">
+            </div>
+            <div class="gp-input">
+                <span>车辆品牌</span>
+                <input type="text" name="carBrand" placeholder="请输入车辆品牌">
+            </div>
+            <div class="gp-input">
+                <span>车辆类型</span>
+                <input type="text" name="carVersion" placeholder="请输入车辆类型">
+            </div>
+            <div class="gp-input weui-cells_checkbox">
+                <label class=" weui-check__label" style="display: -webkit-flex;">
+                    <div class="weui-cell__bd">
+                        <span>是否新车</span>
+                    </div>
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" class="weui-check" name="carIsNew" id="checkBox" checked="checked">
+                        <i class="weui-icon-checked"></i>
+                    </div>
+
+                </label>
+            </div>
+            <input type="hidden" name="loanSource" value="0">
+            <input type="hidden" name="loanType" value="0">
+            <input type="hidden" id="getOpenId" name="remark">
+        </form>
+        <div class="progress-bar insurance-list-icon">
+            <!--条款-->
+            <label for="weuiAgree" class="weui-agree" style="display: inline;padding: 0">
+                <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+                <span class="weui-agree__text">阅读并同意</span>
+            </label>
+            <a href="car_loan_agreement.html" style="font-size: 12px"><label class="blue-font">《物流通贷款业务服务协议》</label></a>
+        </div>
+        <!--确定按钮-->
+        <div class="input-btn btn-blue" id="inputOne">
+            <h5>立即申请</h5>
+        </div>
+        <div class="foot-telephone">
+            <p>联系电话：400-808-4411</p>
+        </div>
+    </div>
+
+    <!--底部菜单栏-->
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toCarLoan()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a onclick="toCarLoanRepayment()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/product-list.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">还款</p>
+        </a>
+        <a onclick="toCarLoanMy()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+</body>
+<script>
+    //表单验证
+    /* function isChinese(obj) {
+         var reg = /^[\u0391-\uFFE5]+$/;
+         if (obj != "" && !reg.test(obj)) {
+             $.alert('必须输入中文！');
+             return false;
+         }
+     }*/
+
+    function validate() {
+        return $("#saveOneForm").validate({
+            rules: {
+                userName: "required",//姓名
+                userIdCard: "required",//身份号
+                userPhone: {
+                    required: true,
+                    number: true
+                },//手机号
+                carBrand: "required",//车辆品牌
+                carVersion: "required"//车辆类型
+            },
+            messages: {
+                userName: "请输入姓名",
+                userIdCard: "请输入身份证号",
+                userPhone: {
+                    required:"请输入手机号",
+                    number:"请输入正确的手机号码格式"
+                },
+                carBrand: "请输入车辆品牌",
+                carVersion: "请输入车辆类型"
+            }
+        })
+    };
+    $(function () {
+        var openid = store.get(allParam.OPEN_ID)
+        $("#getOpenId").val(openid);
+    })
+
+
+    $(".btn-blue").on("click", function () {
+
+        if (validate().form()) {
+            var value = $("#weuiAgree").is(":checked");
+            if (value == true) {
+                var data = $("#saveOneForm").serialize();
+                console.log(data);
+                config.$ajax({
+                    url: config.SERVICE_PATH + "/loanCar/carLoanApplication",
+                    data: data,
+                    method: config.POST,
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res.success) {
+                            $.toptip("申请成功");
+                            toCarLoanSchedule();
+                        } else {
+                            $.alert("申请失败," + res);
+                        }
+                    },
+                    error: function (data) {
+                        $.alert("系统繁忙，请稍后重试！" + data.message);
+                    }
+                })
+            } else {
+                $.alert("请先同意用户协议");
+            }
+        }
+    });
+</script>
+</html>

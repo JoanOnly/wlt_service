@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>剪切板测试</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+</head>
+<body>
+
+<button class="btn" data-clipboard-target="#text">按钮</button>
+
+<div id="text">
+    <div class="add-car insurance-my-list-width margin-bottom-foot">
+        <div class="input-insurance-add-car">
+            <p class="black-font font-size">车险</p>
+        </div>
+        <div class="input-insurance-add-car">
+            <p class="black-font font-size">被保车辆：<span>云A001TT</span></p>
+        </div>
+        <div class="input-insurance-add-car">
+            <p class="black-font font-size">保障日期：<span>2019.01.01 - 2019.12.31</span></p>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    var clipboard = new ClipboardJS('.btn');
+
+    clipboard.on('success', function (e) {
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        e.clearSelection();
+    });
+
+</script>
+</html>

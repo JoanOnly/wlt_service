@@ -1,0 +1,172 @@
+@charset "UTF-8";
+/*
+  * Author: 云手
+  * GitHub: https://github.com/CloudHand233/ch233-not.included---
+  * LastUpdate: 2017.Aug.25th
+  * Version: 3.0.0
+*/
+
+/* import
+   ========================================================================== */
+@import "../core/mixins";
+@import "../core/colors";
+@import "../core/breakpoints";
+/* unify style
+   ========================================================================== */
+@mixin col-normal($padding:.8rem) {
+  padding: $padding;
+  flex: 1 1 auto;
+  align-self: flex-start;
+  @include box-sizing();
+}
+@mixin row-normal($margin:1rem 0) {
+  @include element-size(auto);
+  @include element-space($margin);
+  display: flex;// grid flex layout start
+  display: -webkit-flex; /* Safari */
+  flex-flow:row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;// grid flex layout end
+}
+/* grid start
+   ========================================================================== */
+// no @media
+.grid {
+  @include element-size(auto);
+  @at-root .content-block {
+    @include element-size(60rem!important);
+  }
+  @at-root .content-fluid {
+    @include element-size(100%!important);
+    @include box-sizing();
+    padding: 1rem;
+  }
+  .grid-row {
+    @include row-normal();
+  }
+  .col {
+    width: (100% / 16);
+    @include col-normal();
+  }
+  @for $i from 1 through 16 {
+    .col-#{$i} {
+      width: (100% / 16) * $i;
+      @include col-normal();
+    }
+  }
+}
+// @media 'xl': (min-width: 1200px),
+.grid {
+  @include media-respond(xl) {
+    @include element-size(100%);
+    @at-root .content-block {
+      @include element-size(60rem!important);
+    }
+    @at-root .content-fluid {
+      @include element-size(100%!important);
+      @include box-sizing();
+      padding: 1rem;
+    }
+    .grid-row {
+      @include row-normal();
+    }
+    @include col-normal();
+    @for $i from 1 through 16 {
+      .col-#{$i} {
+        width: (100% / 16) * $i;
+        @include col-normal();
+      }
+    }
+  }
+}
+// @media 'lg': (min-width: 992px, max-width: 1199px),
+.grid {
+  @include media-respond(lg) {
+    @include element-size(auto);
+    @at-root .content-block {
+      @include element-size(49.6rem!important);
+    }
+    @at-root .content-fluid {
+      @include element-size(100%!important);
+      @include box-sizing();
+      padding: 1rem;
+    }
+    .grid-row {
+      @include row-normal();
+    }
+    @for $i from 1 through 16 {
+      .col-lg-#{$i} {
+        width: (100% / 16) * $i;
+        @include col-normal();
+      }
+    }
+  }
+}
+// @media 'md': (min-width: 768px, max-width: 991px),
+.grid {
+  @include media-respond(md) {
+    @include element-size(auto);
+    @at-root .content-block {
+      @include element-size(38.4rem!important);
+    }
+    @at-root .content-fluid {
+      @include element-size(100%!important);
+      @include box-sizing();
+      padding: 1rem;
+    }
+    .grid-row {
+      @include row-normal();
+    }
+    @for $i from 1 through 16 {
+      .col-md-#{$i} {
+        width: (100% / 16) * $i;
+        @include col-normal();
+      }
+    }
+  }
+}
+// @media 'sm': (min-width: 576px, max-width: 767px),
+.grid {
+  @include media-respond(sm) {
+    @include element-size(auto);
+    @at-root .content-block {
+      @include element-size(28.8rem!important);
+    }
+    @at-root .content-fluid {
+      @include element-size(100%!important);
+      @include box-sizing();
+      padding: 1rem;
+    }
+    .grid-row {
+      @include row-normal();
+    }
+    @for $i from 1 through 16 {
+      .col-sm-#{$i} {
+        width: (100% / 16) * $i;
+        @include col-normal();
+      }
+    }
+  }
+}
+// 要去除行的沟槽，为 `grid-row` 添加 `row-no-gutter` 类名；
+// 要删除栅格中单元格的空隙，为 `grid-row` 添加 `col-no-gutter` 类名；
+// 要同时删除所有空隙，为 `grid-row` 添加 `no-gutter` 类名
+.row-no-gutter {
+  margin: 0!important;
+  padding: 0!important;
+}
+.col-no-gutter {
+  [class^=col] {
+    margin: 0!important;
+    padding: 0!important;
+  }
+}
+.no-gutter {
+  margin: 0!important;
+  padding: 0!important;
+  [class^=col] {
+    margin: 0!important;
+    padding: 0!important;
+  }
+}

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>编辑收件地址</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="jquery-weui/js/city-picker.js" charset="utf-8"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toInsurance()">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font">
+            <p>进入首页</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+</div>
+
+<!--template-background公共样式-->
+<div class="template-background">
+    <form id="informationForm">
+        <div class="weui-cells weui-panel">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">姓名</label></div>
+                <div class="weui-cell__bd">
+                    <input type="hidden" name="id">
+                    <input type="hidden" name="userInfoId">
+                    <input class="weui-input" name="userName" placeholder="请输入收件人姓名" value="" maxlength="64">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">电话号码</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input regPhone" name="userPhone" placeholder="请输入电话号码" value="" maxlength="11">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">收件地址</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" name="address" id='city-picker' placeholder="请选择收件地址" value="" maxlength="64"/>
+                </div>
+            </div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea" name="addressDetail" placeholder="详细地址：如道路、门牌号、小区、楼栋号、单元室等" rows="2"></textarea>
+                        <div class="weui-textarea-counter"><span>0</span>/200</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="weui-panel weui-panel_access" id="btn-click">
+        <button class="weui-btn btn-orange">保存</button>
+    </div>
+</div>
+<!--底部导航-->
+<div class="weui-tabbar btn-fixed">
+    <a onclick="toInsurance()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/index.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">主页</p>
+    </a>
+    <a onclick="toInsurancePriceList()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/product-list.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">进度</p>
+    </a>
+    <a onclick="toInsuranceMy()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/driver-my.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">我的</p>
+    </a>
+</div>
+</body>
+<script>
+    $("#city-picker").cityPicker({
+        title: "请选择收件地址"
+    });
+</script>
+<script type="text/javascript">
+    // 验证表单
+    function validate() {
+        return $("#informationForm").validate({
+            rules: {
+                userName: 'required', //姓名
+                userPhone: { //手机号
+                    required: true,
+                    number: true
+                },
+                address: { //地址
+                    required: true,
+                },
+            },
+            messages: {
+                userName: {
+                    required: '请填写姓名'
+                },
+                userPhone: {
+                    required: '请填写手机号',
+                    number: '手机号格式不正确'
+                },
+                address: {
+                    required: '请填写收件地址'
+                },
+            }
+        });
+    }
+
+    //获取用户详情id
+    let userDetailId = store.get(allParam.USER_DETAIL_ID);
+    $(function () {
+        //判断是否有详情
+        if (userDetailId !=undefined && userDetailId !='') {
+            //信息 并绑定
+            queryDetail(userDetailId);
+        }
+    });
+
+    function queryDetail(id) {
+        config.$ajax({
+            url: config.SERVICE_PATH + "/userInfoDetail/queryByUserDetailId",  //URL
+            type: 'POST',
+            dataType: 'json',
+            data:{id:userDetailId},
+            success: function (result) {
+                if (result.success) {
+                    $(":input[name=id]").val(result.data.id);
+                    $(":input[name=userName]").val(result.data.userName);
+                    $(":input[name=userPhone]").val(result.data.userPhone);
+                    $(":input[name=address]").val(result.data.address);
+                    $(":input[name=addressDetail]").val(result.data.addressDetail);
+                    $(":input[name=userInfoId]").val(result.data.userInfoId);
+
+                }
+
+            }
+        });
+    }
+
+    $("#btn-click").click(function () {
+        $("#btn-click").attr("disabled", true);
+        if (validate().form()) {
+            $.ajax({
+                type: "POST",//请求类型
+                url: config.SERVICE_PATH + "/userInfoDetail/saveUserDetail",  //URL
+                data: $("#informationForm").serialize(),
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        $.toptip("保存成功啦！", "success");
+                        toInsuranceMyAddress();
+                    }
+                },
+                error: function (result) {
+                    $("#btn-click").attr("disabled", false);
+                    $.toptip("保存失败，请退出公众号重试！！", "error");
+                }
+            });
+        }
+        return false;
+    });
+</script>
+</html>

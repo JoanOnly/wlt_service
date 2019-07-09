@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>关于理赔</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="weui-tab ">
+    <div class="weui-navbar">
+        <a class="weui-navbar__item weui-bar__item--on" href="#tab1">我要理赔</a>
+        <a class="weui-navbar__item" href="#tab2">理赔记录</a>
+    </div>
+    <div class="weui-tab__bd template-background padding-bottom-navigation-bar">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+            <div class="weui-panel__bd insurance-claims">
+                <!--上传证件-->
+                <div class="weui-gallery" id="galleryAccident">
+                    <span class="weui-gallery__img" id="galleryImgAccident"></span>
+                    <div class="weui-gallery__opr">
+                        <a href="javascript:" class="weui-gallery__del">
+                            <i id="galleryDelAccident" class="weui-icon-delete weui-icon_gallery-delete"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <div class="weui-uploader">
+                                <div class="weui-uploader__hd">
+                                    <p class="weui-uploader__title font-size black-font my-font-weight">上传事故图片<label class="red-font">*</label></p>
+                                    <div class="weui-uploader__info"><span class="accidentCard">0</span>/3</div>
+                                </div>
+                                <ul class="weui-uploader__files" id="uploaderFilesAccident" >
+
+                                </ul>
+                                <div class="weui-uploader__bd">
+                                    <div class="weui-uploader__input-box">
+                                        <input id="uploaderInputAccident" class="weui-uploader__input" type="file" accept="image/*"
+                                               multiple/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-gallery" id="galleryDuty">
+                    <span class="weui-gallery__img" id="galleryImgDuty"></span>
+                    <div class="weui-gallery__opr">
+                        <a href="javascript:" class="weui-gallery__del">
+                            <i id="galleryDelDuty" class="weui-icon-delete weui-icon_gallery-delete"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <div class="weui-uploader">
+                                <div class="weui-uploader__hd">
+                                    <p class="weui-uploader__title font-size black-font my-font-weight">上传责任认定书<label class="red-font">*</label></p>
+                                    <div class="weui-uploader__info"><span class="dutyCard">0</span>/3</div>
+                                </div>
+                                <ul class="weui-uploader__files" id="uploaderFilesDuty">
+
+                                </ul>
+                                <div class="weui-uploader__bd">
+                                    <div class="weui-uploader__input-box">
+                                        <input id="uploaderInputDuty" class="weui-uploader__input" type="file" accept="image/*"
+                                               multiple/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-gallery" id="galleryInvoice">
+                    <span class="weui-gallery__img" id="galleryImgInvoice"></span>
+                    <div class="weui-gallery__opr">
+                        <a href="javascript:" class="weui-gallery__del">
+                            <i id="galleryDelInvoice" class="weui-icon-delete weui-icon_gallery-delete"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <div class="weui-uploader">
+                                <div class="weui-uploader__hd">
+                                    <p class="weui-uploader__title font-size black-font my-font-weight">上传检修发票<label class="red-font">*</label></p>
+                                    <div class="weui-uploader__info"><span class="invoiceCard">0</span>/3</div>
+                                </div>
+                                <ul class="weui-uploader__files" id="uploaderFilesInvoice">
+
+                                </ul>
+                                <div class="weui-uploader__bd">
+                                    <div class="weui-uploader__input-box">
+                                        <input id="uploaderInputInvoice" class="weui-uploader__input" type="file" accept="image/*"
+                                               multiple/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<img src="img/insurance-claims.png">-->
+                <!--<a href="tel:400-808-4411" class="weui-btn btn-orange progress-bar insurance-claims-tel">理赔热线：400-808-4411</a>-->
+            </div>
+        </div>
+        <div id="tab2" class="weui-tab__bd-item">
+            <div class="weui-panel__bd">
+                <div class="weui-form-preview" style="margin-bottom: 10px">
+                    <div class="weui-form-preview__bd">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">被保人：</label>
+                            <span class="weui-form-preview__value car-loan-text-align">事事</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">车牌号码：</label>
+                            <span class="weui-form-preview__value car-loan-text-align">呜呜呜呜</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">保险公司：</label>
+                            <span class="weui-form-preview__value car-loan-text-align">去去去</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">理赔方式：</label>
+                            <span class="weui-form-preview__value car-loan-text-align">车主委托理赔</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">理赔状态：</label>
+                            <span class="weui-form-preview__value car-loan-text-align">理赔已完成</span>
+                        </div>
+                    </div>
+                    <div class="weui-form-preview__ft" onclick="toInsuranceClaimSettlementParticulars()">
+                        <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary">查看详情
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--底部导航栏-->
+<div class="weui-tabbar btn-fixed">
+    <a onclick="toInsurance()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/index.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">主页</p>
+    </a>
+    <a onclick="toInsurancePriceList()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/product-list.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">进度</p>
+    </a>
+    <a onclick="toInsuranceMy()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/driver-my.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">我的</p>
+    </a>
+</div>
+</body>
+<!--上传-->
+<script>
+    $(function () {
+        let tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>';
+        // 上传事故照片
+        let accidentLength = $("#uploaderFilesAccident li").length;
+        $("#uploaderInputAccident").on("change", function (e) {
+            let src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+            for (let i = 0, len = files.length; i < len; ++i) {
+                let file = files[i];
+                if (url) {
+                    src = url.createObjectURL(file);
+                } else {
+                    src = e.target.result;
+                }
+                // 将图片追加到ul中
+                $("#uploaderFilesAccident").append($(tmpl.replace('#url#', src)));
+                accidentLength += 1;
+                // 上传的图片数量
+                $(".accidentCard").text(accidentLength);
+            }
+            // 判断ul下li的数量最大就不能上传
+            if (accidentLength > 2) {
+                $("#uploaderInputAccident").parent().hide();
+            }
+        });
+        $("#uploaderFilesAccident").on("click", "li", function () {
+            $("#galleryImgAccident").attr("style", this.getAttribute("style"));
+            $("#galleryAccident").fadeIn(100);
+        });
+        $("#galleryAccident").on("click", function () {
+            $("#galleryAccident").fadeOut(100);
+        });
+
+        // 删除
+        $("#galleryDelAccident").on('click', function () {
+            let src = $(this).closest('.weui-gallery').find('span').attr('style'); //获取要删除的图片地址
+            $(this).closest('.weui-gallery').next().children().find('ul>li[style="' + src + '"]').remove(); //删除图片
+            accidentLength -= 1;
+            // 上传的图片数量
+            $(".accidentCard").text(accidentLength);
+            // 判断ul下li的数量小于最大数量时显示
+            if (accidentLength < 3) {
+                $("#uploaderInputAccident").parent().show();
+            }
+        });
+
+        // 上传责任认定书
+        let dutyLength = $("#uploaderFilesDuty li").length;
+        $("#uploaderInputDuty").on("change", function (e) {
+            let src, url = window.URL || window.webkitURL || window.mozURL,
+                files = e.target.files;
+            for (let i = 0, len = files.length; i < len; ++i) {
+                let file = files[i];
+
+                if (url) {
+                    src = url.createObjectURL(file);
+                } else {
+                    src = e.target.result;
+                }
+                $("#uploaderFilesDuty").append($(tmpl.replace('#url#', src)));
+                dutyLength += 1;
+                $(".dutyCard").text(dutyLength);
+            }
+            if (dutyLength > 2) {
+                $("#uploaderInputDuty").parent().hide();
+            }
+        });
+        $("#uploaderFilesDuty").on("click", "li", function () {
+            $("#galleryImgDuty").attr("style", this.getAttribute("style"));
+            $("#galleryDuty").fadeIn(100);
+        });
+        $("#galleryDuty").on("click", function () {
+            $("#galleryDuty").fadeOut(100);
+        });
+        // 删除
+        $("#galleryDelDuty").on('click', function () {
+            let src = $(this).closest('.weui-gallery').find('span').attr('style'); //获取要删除的图片地址
+            $(this).closest('.weui-gallery').next().children().find('ul>li[style="' + src + '"]').remove(); //删除图片
+            dutyLength -= 1;
+            $(".dutyCard").text(dutyLength);
+            if (dutyLength < 3) {
+                $("#uploaderInputDuty").parent().show();
+            }
+        });
+
+        // 上传检修发票
+        let invoiceLength = $("#uploaderFilesInvoice li").length;
+        $("#uploaderInputInvoice").on("change", function (e) {
+            let src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+            for (let i = 0, len = files.length; i < len; ++i) {
+                let file = files[i];
+                if (url) {
+                    src = url.createObjectURL(file);
+                } else {
+                    src = e.target.result;
+                }
+                $("#uploaderFilesInvoice").append($(tmpl.replace('#url#', src)));
+                invoiceLength += 1;
+                $(".invoiceCard").text(invoiceLength);
+            }
+            if (invoiceLength > 2) {
+                $("#uploaderInputInvoice").parent().hide();
+            }
+        });
+        $("#uploaderFilesInvoice").on("click", "li", function () {
+            $("#galleryImgInvoice").attr("style", this.getAttribute("style"));
+            $("#galleryInvoice").fadeIn(100);
+        });
+        $("#galleryInvoice").on("click", function () {
+            $("#galleryInvoice").fadeOut(100);
+        });
+        // 删除
+        $("#galleryDelInvoice").on('click', function () {
+            let src = $(this).closest('.weui-gallery').find('span').attr('style'); //获取要删除的图片地址
+            $(this).closest('.weui-gallery').next().children().find('ul>li[style="' + src + '"]').remove(); //删除图片
+            invoiceLength -= 1;
+            $(".invoiceCard").text(invoiceLength);
+            if (invoiceLength < 3) {
+                $("#uploaderInputInvoice").parent().show();
+            }
+        });
+    });
+</script>
+
+</html>

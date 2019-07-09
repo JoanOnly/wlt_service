@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/*
+  * Author: 云手
+  * GitHub: https://github.com/CloudHand233/ch233-not.included---
+  * LastUpdate: 2017.Aug.25th
+  * Version: 3.0.0
+*/
+
+%clear-font { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;}// 文字更细更清晰 gte IE8
+//%boxSizing { @include box-sizing(border-box); }// 采用border-box盒模型
+%display-block { display: block; }//强制盒模型
+%hide-text { text-indent: -9999px; }
+%hide-over-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+%nowrap { white-space: nowrap; overflow: hidden; }
+%a-tag-fluid {
+  a {
+    display: block;
+    width: 100%;
+    height:100%;
+  }
+}

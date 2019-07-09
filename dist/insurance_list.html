@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>进行询价</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background padding-bottom-navigation-bar">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toInsurance()" style="padding-bottom: 0">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font">
+            <p>进入首页</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+    <!--template-preserve-banner公共banner样式-->
+    <div class="template-banner" style="margin: 0">
+        <img src="img/insurance-list.png">
+    </div>
+    <!--进度条-->
+    <div class="insurance-schedule">
+        <div class="flex insurance-list-schedule">
+            <div class="flex-label insurance-list-icon">
+                <img src="img/insurance-list-icon-one.png">
+                <p>险种提交</p>
+            </div>
+            <div class="flex-label wire"></div>
+            <div class="flex-label insurance-list-icon">
+                <img src="img/insurance-list-icon-two.png">
+                <p>保单确认</p>
+            </div>
+            <div class="flex-label wire"></div>
+            <div class="flex-label insurance-list-icon">
+                <img src="img/insurance-list-icon-three.png">
+                <p>保单支付</p>
+            </div>
+        </div>
+    </div>
+    <form id="insurance-form">
+    <!--选择车辆-->
+    <div class="weui-cells weui-panel" style="margin-top: 10px">
+        <div class="weui-cell template-return">
+            <div class="weui-cell__hd font-size personal-img">
+                <img src="img/car-icon.png">
+            </div>
+            <div class="weui-cell__bd"></div>
+            <div class="weui-cell__ft actions font-size">
+                <input id="selt" name="carNumber" placeholder="点击选择车辆" class="weui-input"/>
+            </div>
+            <div class="weui-cell__hd" id="sub">
+               <img src="img/insurance-add-car.png" style="width: 25px;margin: 0 5px">
+            </div>
+        </div>
+    </div>
+    <!--保险选择-->
+    <div class="weui-cells  weui-cells_checkbox weui-panel">
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">车船税</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" name="travelTaxAmountStatus" value="1" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">交通事故责任强制保险</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" name="ctaliAmountStatus" value="1" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+    </div>
+    <div class="weui-cells  weui-cells_checkbox weui-panel">
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">盗抢险</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1" name="robberyAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">境外险</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="abroadAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">货物险</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="goodsAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">车辆损失</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check"  value="1" name="carDamageAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">车上司机</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="driverAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">车上乘客</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="passengerAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">第三者责任</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="threeAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+    </div>
+    <div class="weui-cells  weui-cells_checkbox weui-panel">
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">玻璃破裂</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="glassAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">自然损失</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="naturalAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">火灾爆炸</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="fireAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">车辆划痕损失</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="scratchAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+    </div>
+    <div class="weui-cells  weui-cells_checkbox weui-panel">
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">不计免赔</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="disregardAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">新增设备</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="newAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <!--<label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">人身意外险</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="personalAccidentAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>-->
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">随车行李保险</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="carBaggageAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">法律费用特约险</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="lawAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>
+        <!--<label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p class="font-size">其他险</p>
+            </div>
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" value="1"  name="otherAmountStatus">
+                <i class="weui-icon-checked"></i>
+            </div>
+        </label>-->
+    </div>
+    </form>
+    <!--条款-->
+    <label for="weuiAgree" class="weui-agree" style="display: inline">
+        <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+        <span class="weui-agree__text">阅读并同意</span>
+    </label>
+    <a href="insuance_agreement.html"><label class="blue-font">《物流通保险平台服务协议》</label></a>
+    <div class="weui-panel weui-panel_access">
+        <button class="weui-btn btn-orange" id="form-submit">同意以上，开始报价</button>
+    </div>
+    <!--底部菜单栏-->
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toInsurance()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">主页</p>
+        </a>
+        <a onclick="toInsurancePriceList()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/product-list.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">进度</p>
+        </a>
+        <a onclick="toInsuranceMy()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        //加载车辆信息
+        queryCarList();
+    });
+    //异步请求  提交表单
+    function queryCarList() {
+        config.$ajax({
+            url: config.SERVICE_PATH + "/insurance/queryCarNumber",  //URL
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+                var arr =[];
+                var obj = null;
+                $.each(result.data, function (n, value) {
+                     obj = { 'title': value.carNumber, 'value': value.id};
+                    arr.push(obj);
+                });
+                obj = { 'title': '<font color=red>点击 + 号添加车辆</font>', 'value': ''};
+                arr.push(obj);
+                //绑定下选框
+                $("#selt").select({
+                    title: "选择车辆",
+                    items: arr
+                });
+            }
+        });
+    }
+    //跳转添加车辆
+    $("#sub").click(function () {
+        toInsuranceAddCar();
+    });
+
+    $("#form-submit").click(function () {
+        $("#form-submit").attr("disabled", true);
+        var reg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/;
+        //判断车牌是否选择
+        if (!reg.test($("#selt").val())) {
+            $.toptip("请选择有效车辆！", "error");
+            $("#form-submit").attr("disabled", false);
+            return false;
+        }
+        if ($("#weuiAgree").is(":checked")) {
+            //同意添加
+            var form = $("#insurance-form");
+            var inputNumber = $("<input type='hidden' name='carInfoId'/>");
+            inputNumber.attr("value",$("#selt").attr("data-values"));
+            form.append(inputNumber);
+            //提交表单
+            $.ajax({
+                type: "POST",//请求类型
+                url: config.SERVICE_PATH + "/insurance/saveInsuranceOder",  //URL
+                data: $("#insurance-form").serialize(),
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        $.toptip("保存成功啦！", "success");
+                        toInsurancePriceList();
+                    }
+                },
+                error: function (result) {
+                    $("#form-submit").attr("disabled", false);
+                    $.toptip("保存失败，请退出公众号重试！！", "error");
+                }
+            });
+        }else {
+            $("#form-submit").attr("disabled", false);
+            $.toptip("请阅读并同意协议！", "error");
+        }
+    });
+</script>
+</body>
+</html>

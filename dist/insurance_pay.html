@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>保单支付</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background padding-bottom-navigation-bar">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toInsurance()" style="padding-bottom: 0">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font">
+            <p>进入首页</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+    <!--进度条-->
+    <div class="insurance-schedule progress-bar">
+        <div class="flex insurance-list-schedule">
+            <div class="flex-label insurance-list-icon">
+                <img src="img/insurance-list-icon-one.png">
+                <p>险种提交</p>
+            </div>
+            <div class="flex-label wire"></div>
+            <div class="flex-label insurance-list-icon">
+                <img src="img/insurance-list-icon-two.png">
+                <p>保单确认</p>
+            </div>
+            <div class="flex-label wire"></div>
+            <div class="flex-label insurance-list-icon">
+                <img src="img/insurance-pay.png">
+                <p class="font-color-orange">保单支付</p>
+            </div>
+        </div>
+    </div>
+    <!--内容-->
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">被保人</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="insurerName"></div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">车牌号</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="carNumber"></div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">车架号</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="carIdentifierCode"></div>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">保险单号</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="insuranceOrderId"></div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">商业险保单号</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="commercialInsuranceId"></div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">交强险保单号</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="ctaliId"></div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">车船税票号</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="travelTaxId"></div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">人身意外险保单号</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="personalAccidentId"></div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">随车行保险保单号</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="carBaggageId"></div>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">保障日期</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="time"></div>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">车船税</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="travelTaxAmount">￥0.00元</div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">交通事故责任强制保险</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="ctaliAmount">￥0.00元</div>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="robberyInsuredAmount">盗抢险（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="robberyAmount">￥0.00元</div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="abroadInsuredAmount">境外险（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" abroadInsuredAmount>￥0.00元</div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="goodsInsuredAmount">货物险（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="goodsAmount">￥0.00元</div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="carDamageInsuredAmount">车辆损失（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="carDamageAmount">￥0.00元</div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="driverInsuredAmount">车上司机（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="driverAmount">￥0.00元</div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="passengerInsuredAmount">车上乘客（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="passengerAmount">￥0.00元</div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="threeInsuredAmount">第三者责任险（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="threeAmount">￥0.00元</div>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="glassInsuredAmount">玻璃破裂（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="glassAmount">￥0.00元</div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="naturalInsuredAmount">自然损失（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="naturalAmount">￥0.00元</div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="fireInsuredAmount">火灾爆炸（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="fireAmount">￥0.00元</div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="scratchInsuredAmount">车辆划痕损失（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="scratchAmount">￥0.00元</div>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="disregardInsuredAmount">不计免赔（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="disregardAmount">￥0.00元</div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="newInsuredAmount">新增设备（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="newAmount">￥0.00元</div>
+        </div>
+        <!--<div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">人身意外险</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="personalAccidentAmount">￥0.00元</div>
+        </div>-->
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">随车行李保险</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="carBaggageAmount">￥0.00元</div>
+        </div>
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size" id="lawInsuredAmount">法律费用特约险（0.00万元）</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="lawAmount">￥0.00元</div>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd">
+                <p class="font-size">共计</p>
+            </div>
+            <div class="weui-cell__ft actions font-size" id="sumAmount">￥0.00元</div>
+        </div>
+    </div>
+
+    <div class="weui-panel weui-panel_access">
+        <button class="weui-btn background-color-grey" onclick="toInsuranceMyList()" >已支付，返回订单</button>
+    </div>
+    <!--底部菜单栏-->
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toInsurance()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">主页</p>
+        </a>
+        <a onclick="toInsurancePriceList()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/product-list.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">进度</p>
+        </a>
+        <a onclick="toInsuranceMy()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    let isInsuranceId = store.get(allParam.INSURANCE_IS_PAY_ID);
+    $(function () {
+        //判断是否有订单id
+        if (isInsuranceId !=undefined && isInsuranceId !='') {
+            //查询车辆信息 并绑定
+            getInsuranceInfo(isInsuranceId);
+        }
+    });
+
+    //根据保险id查询
+    function getInsuranceInfo(id) {
+        config.$ajax({
+            url: config.SERVICE_PATH + "/insurance/queryInsuranceId",  //URL
+            type: 'POST',
+            dataType: 'json',
+            data:{insuranceId:id},
+            success: function (result) {
+                if (result.success) {
+                    console.log(result.data);
+                    //查询出数据  绑定数据
+                    $("#carNumber").text(result.data.carNumber);
+                    $("#insurerName").text(result.data.insurerName);
+                    $("#carIdentifierCode").text(result.data.carIdentifierCode);
+                    $("#time").text(result.data.gmtStart+" 至 "+result.data.gmtEnd);
+                    $("#insuranceOrderId").text(result.data.insuranceOrderId);
+                    $("#commercialInsuranceId").text(result.data.commercialInsuranceId);
+                    $("#ctaliId").text(result.data.ctaliId);
+                    $("#travelTaxId").text(result.data.travelTaxId);
+                    $("#personalAccidentId").text(result.data.personalAccidentId);
+                    $("#carBaggageId").text(result.data.carBaggageId);
+
+                    //判断保险是否选中
+                    if (result.data.ctaliAmountStatus == "1"){
+                        $("#ctaliAmount").text("￥"+result.data.ctaliAmount+"元");
+                    }
+                    if (result.data.travelTaxAmountStatus == "1"){
+                        $("#travelTaxAmount").text("￥"+result.data.travelTaxAmount+"元");
+                    }
+                    /*if (result.data.personalAccidentAmountStatus == "1"){
+                        $("#personalAccidentAmount").text("￥"+result.data.personalAccidentAmount+"元");
+                    }*/
+                    if (result.data.carBaggageAmountStatus == "1"){
+                        $("#carBaggageAmount").text("￥"+result.data.carBaggageAmount+"元");
+                    }
+                    if (result.data.carDamageAmountStatus == "1"){
+                        $("#carDamageAmount").text("￥"+result.data.carDamageAmount+"元");
+                        $("#carDamageInsuredAmount").text("车损险（"+result.data.carDamageInsuredAmount+"万元）");
+                    }
+                    if (result.data.threeAmountStatus == "1"){
+                        $("#threeAmount").text("￥"+result.data.threeAmount+"元");
+                        $("#threeInsuredAmount").text("三者险（"+result.data.threeInsuredAmount+"万元）");
+                    }
+                    if (result.data.driverAmountStatus == "1"){
+                        $("#driverAmount").text("￥"+result.data.driverAmount+"元");
+                        $("#driverInsuredAmount").text("车上司（"+result.data.driverInsuredAmount+"万元）");
+                    }
+                    if (result.data.passengerAmountStatus == "1"){
+                        $("#passengerAmount").text("￥"+result.data.passengerAmount+"元");
+                        $("#passengerInsuredAmount").text("车上乘客（"+result.data.passengerInsuredAmount+"万元）");
+                    }
+                    if (result.data.robberyAmountStatus == "1"){
+                        $("#robberyAmount").text("￥"+result.data.robberyAmount+"元");
+                        $("#robberyInsuredAmount").text("盗抢险（"+result.data.robberyInsuredAmount+"万元）");
+                    }
+                    if (result.data.glassAmountStatus == "1"){
+                        $("#glassAmount").text("￥"+result.data.glassAmount+"元");
+                        $("#glassInsuredAmount").text("玻璃险（"+result.data.glassInsuredAmount+"万元）");
+                    }
+                    if (result.data.scratchAmountStatus == "1"){
+                        $("#scratchAmount").text("￥"+result.data.scratchAmount+"元");
+                        $("#scratchInsuredAmount").text("划痕险（"+result.data.scratchInsuredAmount+"万元）");
+                    }
+                    if (result.data.naturalAmountStatus == "1"){
+                        $("#naturalAmount").text("￥"+result.data.naturalAmount+"元");
+                        $("#naturalInsuredAmount").text("自然损失险（"+result.data.naturalInsuredAmount+"万元）");
+                    }
+                    if (result.data.fireAmountStatus == "1"){
+                        $("#fireAmount").text("￥"+result.data.fireAmount+"元");
+                        $("#fireInsuredAmount").text("火灾爆炸险（"+result.data.fireInsuredAmount+"元）");
+                    }
+                    if (result.data.newAmountStatus == "1"){
+                        $("#newAmount").text("￥"+result.data.newAmount+"元");
+                        $("#newInsuredAmount").text("新增设备险（"+result.data.newInsuredAmount+"万元）");
+                    }
+                    if (result.data.disregardAmountStatus == "1"){
+                        $("#disregardAmount").text("￥"+result.data.disregardAmount+"元");
+                        $("#disregardInsuredAmount").text("不计免赔险（"+result.data.disregardInsuredAmount+"万元）");
+                    }
+                    if (result.data.lawAmountStatus == "1"){
+                        $("#lawAmount").text("￥"+result.data.lawAmount+"元");
+                        $("#lawInsuredAmount").text("法律费用特约险（"+result.data.lawInsuredAmount+"万元）");
+                    }
+                    if (result.data.abroadAmountStatus == "1"){
+                        $("#abroadAmount").text("￥"+result.data.abroadAmount+"元");
+                        $("#abroadInsuredAmount").text("境外险（"+result.data.abroadInsuredAmount+"万元）");
+                    }
+                    if (result.data.goodsAmountStatus == "1"){
+                        $("#goodsAmount").text("￥"+result.data.goodsAmount+"元");
+                        $("#goodsInsuredAmount").text("货物险（"+result.data.goodsInsuredAmount+"万元）");
+                    }
+                    $("#sumAmount").text("￥"+result.data.insuranceTotalAmount+"元");
+                }
+            }
+        });
+    }
+</script>
+</html>

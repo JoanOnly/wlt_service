@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>借款确认</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background padding-bottom-navigation-bar">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toCarLoan()">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font">
+            <p>进入首页</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+    <form id="carLoanForm">
+        <div id="carLoan"></div>
+    </form>
+    <!--条款-->
+    <label for="weuiAgree" class="weui-agree" style="display: inline">
+        <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+        <span class="weui-agree__text">阅读并同意</span>
+    </label>
+    <a href="car_loan_agreement.html"><label class="blue-font">《物流通贷款业务服务协议》</label></a>
+    <div class="weui-panel weui-panel_access">
+        <button class="weui-btn background-color-red" id="form-submit">同意以上，确认贷款</button>
+    </div>
+    <!--底部菜单栏-->
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toCarLoan()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">主页</p>
+        </a>
+        <a onclick="toCarLoanRepayment()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/product-list.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">还款</p>
+        </a>
+        <a onclick="toCarLoanMy()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+</body>
+<script>
+    $(function () {
+        const orderId = config.getUrlParam(window.location.href, "id");
+        if (null != orderId) {
+            store.set(allParam.ORDER_ID, parseInt(orderId));
+        }
+        getCarloanInfo();
+        // 提交
+        $("#form-submit").click(function () {
+            // 是否阅读并同意协议
+            if ($("#weuiAgree").is(":checked")) {
+                //同意
+                let data = $("#carLoanForm").serialize();
+                console.log(data);
+                config.$ajax({
+                    url: config.SERVICE_PATH + "/loanCar/setLoanConfirmation",
+                    method: config.GET,
+                    data: data,
+                    datatype: "json",
+                    success: function (res) {
+                        if (res.success) {
+                            $.toptip("确认成功");
+                            $('#form-submit').removeClass('background-color-red');
+                            $('#form-submit').addClass('background-color-grey');
+                            $('#form-submit').attr("disabled", true);
+                            toCarLoanSchedule();
+                        } else {
+                            $.alert("确认失败");
+                        }
+                    },
+                    error: function (data) {
+                        $.alert("系统繁忙,请稍后再试" + data.message);
+                    }
+                })
+
+            } else {
+                $.toptip("请阅读并同意协议！", "error");
+            }
+        });
+
+        function getCarloanInfo() {
+           config.$ajax({
+                url: config.SERVICE_PATH + "/loanCar/getLoanConfirmation",
+                method: config.GET,
+                data: {id: store.get(allParam.ORDER_ID)},
+                datatype: 'json',
+                success: function (res) {
+                    if (res.success) {
+                        $('#carLoanForm').append(template("car_loan", res.data));
+                    } else {
+                        $.alert("失败");
+                    }
+
+                },
+                error: function (data) {
+                    $.alert("系统繁忙,请稍后再试" + data.message);
+                }
+            });
+        }
+    })
+</script>
+<script id="car_loan" type="text/html">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_appmsg" name="loanAmount">
+                <div class="weui-media-box__bd">
+                    <input type="hidden" value={{loanAmount}} name="loanAmount">
+                    <input type="hidden" value={{id}} name="id">
+                    <input type="hidden" value={{writerName}} name="writerName">
+                    <input type="hidden" value={{loanId}} name="loanId">
+                    <input type="hidden" value={{loanInterestMethod}} name="loanInterestMethod">
+                    <p class="weui-media-box__desc">贷款金额（人民币）</p>
+                    <h4 class="weui-media-box__title">{{loanAmount}}</h4>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">期限/利率</label></div>
+                <div class="weui-cell__bd">
+                    <input type="hidden" value={{loanNumber}} name="loanNumber">
+                    <input type="hidden" value={{loanRate}} name="loanRate">
+                    <p class="car-loan-text-align">{{loanNumber}}期/{{loanRate}}%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label font-size">借款人</label></div>
+            <div class="weui-cell__bd car-loan-text-align grey-font">
+                <input type="hidden" value={{userName}} name="userName">
+                <span>{{userName}}</span>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label font-size">身份证号</label></div>
+            <div class="weui-cell__bd car-loan-text-align grey-font">
+                <input type="hidden" value={{userIdCard}} name="userIdCard">
+                <span>{{userIdCard}}</span>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label font-size">手机号码</label></div>
+            <div class="weui-cell__bd car-loan-text-align grey-font">
+                <input type="hidden" value={{userPhone}} name="userPhone">
+                <span>{{userPhone}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label font-size">借款利率</label></div>
+            <div class="weui-cell__bd car-loan-text-align grey-font">
+                <span>{{loanRate}}%</span>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label font-size">借款期限</label></div>
+            <div class="weui-cell__bd car-loan-text-align grey-font">
+                <span>{{loanNumber}}期</span>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label font-size">计息方式</label></div>
+            <div class="weui-cell__bd car-loan-text-align grey-font">
+                <input type="hidden" value={{payEachAmount}} name="payEachAmount">
+                <span>
+                    {{if loanInterestMethod==0}}
+                    等额本金
+                    {{else if loanInterestMethod==1}}
+                    等额本息
+                    {{else if loanInterestMethod==2}}
+                    先息后本
+                    {{/if}}
+                </span>
+            </div>
+        </div>
+        <input type="hidden" name="loanStatus">
+    </div>
+</script>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>发车信息</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toIndex()">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <!--<div class="return-font">-->
+        <!--<p>进入首页</p>-->
+        <!--<img src="img/gp-btn.png">-->
+        <!--</div>-->
+    </div>
+</div>
+<!--template-background公共样式-->
+<div class="template-background padding-bottom-navigation-bar">
+    <form id="dispatchForm">
+        <!--发车信息-->
+        <input hidden id="id" name="id">
+        <div class="weui-cells weui-cells_form weui-panel">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">发货吨位<label
+                        class="red-font">*</label></label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="transportTon" placeholder="请输入发货吨位" maxlength="64">
+                </div>
+                <span>吨</span>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form weui-panel">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">运费单价<label
+                        class="red-font">*</label></label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="unitPriceAmount" placeholder="请输入运费单价" maxlength="11">
+                </div>
+                <span>元</span>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form weui-panel">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">油卡号</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="oilCardNumber" name="oilCardNumber" placeholder="请输入油卡号最后7位数" maxlength="10">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">油卡卡费</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="oilCardAmount" placeholder="请输入油卡卡费" maxlength="64">
+                </div>
+                <span>元</span>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">油卡充值费</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="oilAmount" placeholder="请输入油卡充值费" maxlength="64">
+                </div>
+                <span>元</span>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form weui-panel">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">信息费</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="informationFeeAmount" placeholder="请输入信息费" maxlength="64">
+                </div>
+                <span>元</span>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">派车时间</label></div>
+                <div class="weui-cell__bd">
+                    <input type="date" class="weui-input" name="gmtDispatch" placeholder="请输入派车时间" maxlength="64">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">追货宝使用单位</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="gpsCompany" placeholder="请输入追货宝使用单位" maxlength="64">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">追货宝编号</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="gpsNumber" placeholder="请输入追货宝编号" maxlength="64">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form weui-panel">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">追货宝租赁费</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="gpsCostAmount" placeholder="请输入追货宝租赁费" maxlength="64">
+                </div>
+                <span>元</span>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">扫地费</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="sweepAmount" placeholder="请输入扫地费" maxlength="64">
+                </div>
+                <span>元</span>
+            </div>
+        </div>
+        <div class="weui-panel">
+            <div id="doSubmit" class="weui-btn background-color-red btn-css">确定发车</div>
+        </div>
+    </form>
+    <!--底部导航栏-->
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toDispatchList()" class="weui-tabbar__item">
+            <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">主页</p>
+        </a>
+        <a onclick="toDispatchAdd()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/publish.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">发布</p>
+        </a>
+        <a onclick="toDispatchPersonal()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+</body>
+<script>
+        $(function () {
+            // 验证表单
+            function validate() {
+                return $("#dispatchForm").validate({
+                    rules: {
+                        transportTon: { //发货吨位
+                            required: true,
+                            number: true
+                        },
+                        oilCardAmount: { //油卡卡费
+                            number: true
+                        },
+                        oilAmount: { //油卡充值费
+                            number: true
+                        },
+                        informationFeeAmount: { //信息费
+                            number: true
+                        },
+                        gpsCostAmount: { //追货宝租赁费
+                            number: true
+                        },
+                        sweepAmount: { //扫地费
+                            number: true
+                        },
+                        unitPriceAmount: {
+                            required: true,
+                            number: true
+                        }
+                    },
+                    messages: {
+                        transportTon: {
+                            required: '请填写发货吨位',
+                            number: '发货吨位格式不正确'
+                        },
+                        oilCardAmount: {
+                            number: '油卡卡费格式不正确'
+                        },
+                        oilAmount: {
+                            number: '油卡充值费格式不正确'
+                        },
+                        informationFeeAmount: {
+                            number: '信息费格式不正确'
+                        },
+                        gpsCostAmount: {
+                            number: '追货宝租赁费格式不正确'
+                        },
+                        sweepAmount: {
+                            number: '扫地费格式不正确'
+                        },
+                        unitPriceAmount: {
+                            required: '请填写运费单价',
+                            number: '运费单价格式不正确'
+                        }
+                    }
+                });
+            }
+
+            init();
+            //点击切换升降序
+            $(document).on('click', '.sort-font', function () {
+                var src = $(this).find("img").attr("src"); //获取图片地址
+                var ascending = "img/ascending_order.png"; //升序
+                var descending = "img/descending_order.png"; //降序
+                if (src === ascending) {
+                    $(this).find("img").attr("src", descending); //变成降序
+                } else {
+                    $(this).find("img").attr("src", ascending); //变成升序
+                }
+            });
+
+            function init() {
+                // 将运单id放入表单
+                $("#id").val(store.get(allParam.DISPATCH_ID));
+                //填充油卡号
+                $("#oilCardNumber").val(store.get(allParam.OIL_CARD_NUMBER));
+            }
+
+            //跳转到运单列表
+            function toDispatchList() {
+                window.location.href = 'dispatch_cars_list.html';
+            }
+
+            //提交信息
+            function doDispatch() {
+                if (validate().form()) {
+                    config.$ajax({
+                        url: config.SERVICE_PATH + "/weChatDispatch/doDispatch",  //URL
+                        data: $("#dispatchForm").serialize(),
+                        method: config.POST,
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.success) {
+                                toDispatchList();
+                                $.toast("操作成功", 2000);
+                            }
+                        },
+                        error: function (data) {
+                            console.log(data);
+                            $.alert("系统繁忙，请稍后重试！" + data.message);
+                        }
+                    });
+                }
+                return false;
+            }
+
+            //发车按钮点击事件
+            $("#doSubmit").on('click touchstart', function () {
+                doDispatch();
+            });
+        });
+</script>
+</html>

@@ -1,0 +1,246 @@
+@charset "UTF-8";
+.template-background {
+  .banner {
+    padding: 10px;
+    background-color: #fff;
+  }
+
+  .wrapper-icon {
+    position: relative;
+    background-color: #FFFFFF;
+    margin-top: 20px;
+    padding-bottom: 10px;
+
+    .content-icon {
+      left: 50%;
+      transform: translateX(-50%);
+      position: relative;
+      width: 90%;
+      @include inline-block;
+      text-align: center;
+
+      .icon {
+        @include inline-block;
+        width: 50px;
+        margin-left: 3%;
+        margin-right: 3%;
+        padding-top: 10px;
+        position: relative;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .wrapper-template {
+    width: 100%;
+    background-color: #FFFFFF;
+    margin-top: 10px;
+
+    .template-tt {
+      border-left: 8px solid #ed8156;
+      margin-left: 15px;
+      position: relative;
+      top: 15px;
+
+      p {
+        font-size: 18px;
+        color: #333333;
+        margin-left: 10px;
+      }
+    }
+
+    .content {
+      width: 100%;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 20px 0;
+      text-align: center;
+
+      .content-btn {
+        width: 45%;
+        @include inline-block;
+        position: relative;
+
+        img {
+          width: 100%;
+        }
+      }
+
+    }
+  }
+
+  .wrapper-template-two {
+    top: 20px;
+
+    .template-tt {
+      p {
+        @include inline-block;
+      }
+
+      a {
+        @include inline-block;
+        color: #999999;
+        position: relative;
+        float: right;
+        right: 20px;
+        text-decoration: none
+      }
+    }
+
+    .gp {
+      position: relative;
+      border-bottom: 1px solid #b5b4b4;
+
+      .gp-img {
+        width: 100px;
+        margin-left: 20px;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        @include inline-block;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      .gp-tt {
+        @include inline-block;
+        position: relative;
+        margin-left: 20px;
+        margin-top: 20px;
+        line-height: 18px;
+
+        h5 {
+          font-size: 20px;
+        }
+
+        span {
+          text-transform: uppercase;
+          font-size: 12px;
+          color: #333333;
+        }
+      }
+
+      .gp-btn {
+        @include inline-block;
+        width: 10px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 30px;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .gp-two {
+      border-bottom: none;
+    }
+  }
+
+  .wrapper-template-three {
+    top: 30px;
+
+    .gp-three-center {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      width: 104%;
+
+      .gp-three {
+        position: relative;
+        margin-top: 30px;
+        @include inline-block;
+       padding: 0 4px;
+
+        .gp-three-img {
+          width: 100px;
+          text-align: center;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .gp-three-tt {
+          display: block;
+          width: 100px;
+          margin-top: 10px;
+
+          h5 {
+            font-size: 18px;
+            text-align: center;
+            display: block;
+          }
+
+          span {
+            text-transform: uppercase;
+            font-size: 12px;
+            color: #333333;
+            text-align: center;
+            display: block;
+          }
+
+          p {
+            display: block;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+//wrapper-car-service-font车主服务
+.wrapper-car-service-font {
+  position: relative;
+  width: 75%;
+  margin: 0 auto;
+  top: 200px;
+
+  h5 {
+    font-size: 20px;
+    color: #333333;
+    padding: 10px 0;
+    border-bottom: 1px solid #999999;
+  }
+
+  p {
+    text-align: justify;
+    margin-top: 10px;
+  }
+}
+
+.wrapper-car-business-font {
+  position: relative;
+  top: 200px;
+  display: block;
+  width: 220px;
+  margin: 0 auto;
+
+  ul {
+    line-height: 40px;
+    position: relative;
+
+    li {
+      font-size: 16px;
+      @include inline-block;
+    }
+
+    img {
+      width: 18px;
+      @include inline-block;
+      padding-right: 10px;
+    }
+  }
+
+}
+
+

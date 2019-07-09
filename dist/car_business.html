@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>物流通_增值服务</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-return公共样式-->
+<div class="template-return" onclick="toIndex()" style="padding-bottom: 0">
+    <div class="head-logo">
+        <img src="img/head-logo.png">
+        <h5>智慧物流通</h5>
+    </div>
+    <div class="return-font">
+        <p>进入首页</p>
+        <img src="img/gp-btn.png">
+    </div>
+</div>
+<!--template-banner公共banner样式-->
+<div class="template-banner">
+    <img src="img/car_business.jpg">
+</div>
+<div class="template-add-btn">
+    <div class="add-btn-content">
+        <div class="add-btn-tt">
+            <h5>添加车辆，品质甄选产品定制</h5>
+        </div>
+        <div class="add-btn-icon">
+            <div class="btn-icon">
+                <img src="img/add-btn-four.png">
+                <p>保险</p>
+            </div>
+            <div class="btn-icon">
+                <img src="img/add-btn-five.png">
+                <p>贷款</p>
+            </div>
+            <div class="btn-icon">
+                <img src="img/add-btn-six.png">
+                <p>运费垫付</p>
+            </div>
+        </div>
+        <div class="add-btn btn-orange" onclick="toInsuranceAddCar()">
+            <img src="img/add-btn.png">
+            <h5>添加车辆</h5>
+        </div>
+    </div>
+
+</div>
+<div class="wrapper-car-business-font">
+    <ul>
+        <li><img src="img/circular.png">多家公司实时报价</li>
+        <li><img src="img/circular.png">一键预约，车险随行</li>
+        <li><img src="img/circular.png">评估征信，贷款迅速审批</li>
+        <li><img src="img/circular.png">到期自动提醒</li>
+    </ul>
+</div>
+<!--底部菜单栏-->
+<div class="weui-tabbar btn-fixed">
+    <a onclick="toIndex()" class="weui-tabbar__item">
+        <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+        <div class="weui-tabbar__icon">
+            <img src="img/index.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">首页</p>
+    </a>
+    <a onclick="toServiceList()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/product-list.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">产品</p>
+    </a>
+    <a onclick="toDriverMy()" class="weui-tabbar__item">
+        <div class="weui-tabbar__icon">
+            <img src="img/driver-my.png" alt="">
+        </div>
+        <p class="weui-tabbar__label">我的</p>
+    </a>
+</div>
+</body>
+</html>

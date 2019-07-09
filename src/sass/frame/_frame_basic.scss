@@ -1,0 +1,105 @@
+@charset "UTF-8";
+/*!
+  * Author: 云手
+  * GitHub: https://github.com/CloudHand233/ch233-not.included---
+  * LastUpdate: 2017.Aug.25th
+  * Version: 3.0.0
+*/
+
+/* import
+   ========================================================================== */
+@import "../core/mixins";
+@import "../core/colors";
+@import "../core/gradients";
+/* clear font rendering
+   ========================================================================== */
+* {
+  @extend %clear-font;
+}
+/* layout
+   ========================================================================== */
+a {
+  cursor: pointer;
+}
+a:link,a:visited {
+  color: rgba(0,0,0,.54);
+}
+a:hover {
+  color: rgba(0,0,0,.87);
+}
+
+/* text
+   ========================================================================== */
+h1,.tt-h1 {
+  @include element-text(5.6,rgba(0,0,0,.54));
+  font-weight: bold;
+}
+h2,.tt-h2 {
+  @include element-text(2.8,rgba(0,0,0,.54));
+  font-weight: bold;
+}
+h3,.tt-h3 {
+  @include element-text(2.25,rgba(0,0,0,.54));
+  font-weight: bold;
+}
+h4,.tt-h4 {
+  @include element-text(1.75,rgba(0,0,0,.87));
+  font-weight: bold;
+}
+h5,.tt-h5 {
+  @include element-text(1.2,rgba(0,0,0,.87));
+  font-weight: bold;
+}
+h6,.tt-h6 {
+  @include element-text(1,rgba(0,0,0,.87));
+  font-weight: bold;
+}
+
+.card-headline {
+  @include element-text(.9,rgba(0,0,0,.87));
+}
+.card-tt {
+  @include element-text(.8,rgba(0,0,0,.87));
+}
+
+.wrapper-headline {
+   @include element-text(1,rgba(0,0,0,.87));
+   font-weight: bold;
+ }
+.wrapper-tt {
+  @include element-text(.8,rgba(0,0,0,.87));
+  font-weight: bold;
+}
+
+.section-tt {
+  @include element-text(.7,rgba(0,0,0,.87));
+}
+
+.inline-tt {
+  @include element-text(.6,rgba(0,0,0,.87));
+  font-weight: bold;
+}
+div {
+  @include element-text(.7,rgba(0,0,0,.87));
+}
+p {
+  @include element-text(.6,rgba(0,0,0,.54));
+  line-height: 1.2rem;
+}
+
+.align-left {
+  text-align: left!important;
+}
+.align-center {
+  text-align: center!important;
+}
+.align-right {
+  text-align: right!important;
+}
+
+.fluid-img {
+  img {
+    @include element-size(100%);
+    @include element-space(0,0);
+  }
+}

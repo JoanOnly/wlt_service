@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>车贷购车</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+
+
+<!--template-background公共样式-->
+<div class="template-background">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toCarLoan()">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font" id="closeBtn">
+            <p>返回</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+
+    <div id="message_center"></div>
+
+    <div class="weui-loadmore">
+        <input type="hidden" id="loadData" value="1">
+        <i class="weui-loading"></i>
+        <span class="weui-loadmore__tips">正在加载</span>
+    </div>
+
+</div>
+</body>
+<script id="message_center_tpl" type="text/html">
+    {{each data}}
+    <div class="weui-panel weui-panel_access margin-bottom data-row">
+        <p class="date-width">{{$value.gmtCreate}}</p>
+        <div class="weui-panel__hd type-btn" style="padding: 0" data-urlt="{{$value.msgTypeUrl}}">
+            <a class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd font-size22">{{$value.msgType}}</div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+        <div class="weui-form-preview__bd status-btn" data-url="{{$value.msgUrl}}" data-id="{{$value.id}}">
+            <a type="hidden">
+                <div class="weui-form-preview__item flex">
+                    <label class="black-font flex-span font-weight font-size20">{{$value.msgTitle}}</label>
+                    <span class="red-font flex-label msgStatus">
+                        <input type="hidden" value={{$value.msgStatus}}>
+                        {{if $value.msgStatus==true}}
+                        <img src="img/point-grey.png">
+                        {{else if $value.msgStatus==false}}
+                        <img src="img/point-red.png">
+                        {{/if}}
+                    </span>
+                </div>
+
+                <div class="weui-form-preview__item">
+                    <span class="weui-form-preview__value grey-font font-size">{{$value.msgContent}}</span>
+                </div>
+            </a>
+        </div>
+        <div class="weui-panel__ft status-btn" data-url="{{$value.msgUrl}}" data-id="{{$value.id}}">
+            <a target="_blank" class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd green-font">查看详情</div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+        <input type="hidden" data-pid="{{$value.msgUrl}}">
+    </div>
+    {{/each}}
+</script>
+<script>
+
+    $(function () {
+
+        let loading = false;  //状态标记
+
+        //显示滚动加载
+        function showLoading() {
+            $(".weui-loadmore").show();
+            $(document.body).infinite();
+            loading = false;
+        }
+
+        //隐藏滚动加载
+        function destroyLoading() {
+            $(".weui-loadmore").hide();
+            $(document.body).destroyInfinite();
+            loading = false;
+        }
+
+        //初始化数据
+        function loadData(thisPage) {
+            $.ajax({
+                type: config.POST,//请求类型
+                url: config.SERVICE_PATH + "/sysMsg/page",  //URL
+                data: {page: thisPage, limit: 5},
+                dataType: 'json',
+                success: function (result) {
+                    if (result.data.length > 0) {
+                        let html = template("message_center_tpl", result);
+                        $('#message_center').append(html);
+                        // 如果存在的数据小于服务器上的数据，就显示加载更多按钮
+                        if (result.count > $('#message_center').find(".data-row").length) {
+                            showLoading();
+                        } else {
+                            destroyLoading();
+                        }
+                    }
+                    if (result.code === 2015) {
+                        $.alert(result.msg, function () {
+                            window.location.href = config.SERVICE_PATH + "/wechat/wxCodeGetLoanCar";
+                        });
+                    }
+                    if (result.count === 0) {
+                        $('#message_center').append("<div class=\"weui-panel insurance-list-icon\">无数据</div>");
+                        destroyLoading();
+                    }
+                },
+                error: function (data) {
+                    destroyLoading();
+                    $.alert("系统繁忙,请稍后再试" + data.message);
+                }
+            });
+        }
+
+        //初始化页面加载第一页
+        loadData(1);
+
+        //滚动加载
+        $(document.body).infinite().on("infinite", function () {
+            if (loading) return;
+            loading = true;
+            let _page = $("#loadData").val();
+            _page++;
+            $("#loadData").val(_page);
+            loadData(_page);
+        });
+
+        // 返回上一页
+        $('#closeBtn').on('click', function () {
+            history.go(-1);
+        });
+
+        //点击消息内容和查看详情
+        $(document).on("click", ".status-btn", function () {
+            let url = $(this).data("url");
+            $.ajax({
+                type: config.POST,//请求类型
+                url: config.SERVICE_PATH + "/sysMsg/updateStatus",  //URL
+                dataType: 'json',
+                data: {id: $(this).data("id")},
+                success: function (result) {
+                    if (result.msg) {
+                        window.location.href = url;
+                    } else {
+                        window.location.href = "message_center.html";
+                    }
+                },
+                error: function (data) {
+                    $.alert("系统繁忙,请稍后再试" + data.message);
+                }
+            });
+        });
+
+        //点击消息类型
+        $(document).on("click", ".type-btn", function () {
+            let url = $(this).data("urlt");
+            window.location.href = url;
+        });
+
+
+    });
+</script>
+</html>

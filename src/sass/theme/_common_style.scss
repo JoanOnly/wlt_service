@@ -1,0 +1,449 @@
+@charset "UTF-8";
+//template-background灰色背景图
+.template-background {
+  background-color: #f2f2f2;
+  width: 100%;
+  position: relative;
+}
+
+//template-return返回首页样式
+.template-return {
+  position: relative;
+  padding: 10px 20px 10px 20px;
+
+  .head-logo {
+    @include inline-block;
+
+    img {
+      width: 25px;
+      @include inline-block;
+    }
+
+    h5 {
+      font-size: 14px;
+      color: #666666;
+      @include inline-block;
+    }
+  }
+
+  .return-font {
+    @include inline-block;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+
+    p {
+      @include inline-block;
+    }
+
+    img {
+      width: 8px;
+      @include inline-block;
+    }
+  }
+}
+
+//template-banner通用banner样式
+.template-banner {
+  width: 100%;
+  position: relative;
+  margin: 10px 0;
+
+  img {
+    width: 100%;
+  }
+}
+
+//index-foot我是有底线的样式
+.index-foot {
+  width: 200px;
+  position: relative;
+  padding: 20px 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  img {
+    width: 100%;
+  }
+}
+
+//template-add-btn添加车辆模版
+.template-add-btn {
+  width: 80%;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: -1px 1px 7px #acabab;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 135px;
+
+  .add-btn-content {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    @include inline-block;
+
+    .add-btn-tt {
+      position: relative;
+
+      h5 {
+        font-size: 18px;
+        color: #333333;
+        margin-top: 25px;
+      }
+    }
+
+    .add-btn-icon {
+      position: relative;
+      margin-top: 15px;
+      text-align: center;
+
+      .btn-icon {
+        @include inline-block;
+        text-align: center;
+        margin: 5px 10px;
+
+        img {
+          width: 40px;
+        }
+      }
+    }
+
+    .add-btn {
+      width: 75%;
+      height: 45px;
+      border-radius: 8px;
+      text-align: center;
+      line-height: 45px;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 10px 0 30px 0;
+
+      img {
+        width: 25px;
+        @include inline-block;
+      }
+
+      h5 {
+        font-size: 18px;
+        @include inline-block;
+        color: #FFFFFF;
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+.btn-background-blue {
+  background-color: #5d7ec9;
+}
+
+//template-preserve-banner保存界面样式
+.template-background {
+  .template-preserve-banner {
+    width: 100%;
+    height: 180px;
+    margin: 10px 0;
+    position: relative;
+    background-color: #FFFFFF;
+    box-shadow: 3px 1px 10px #bcbbbb;
+
+    .template-preserve-content {
+      position: relative;
+      text-align: center;
+      top: 30px;
+
+      .preserve-img {
+        width: 130px;
+        position: relative;
+        @include inline-block;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .preserve-tt {
+        @include inline-block;
+        margin-left: 20px;
+
+        span {
+          text-transform: uppercase;
+        }
+
+        .preserve-font-content {
+          .gp-preserve-font {
+            @include inline-block;
+
+            .font-content {
+              width: 10px;
+              height: 10px;
+              //background-color: #f6c344;
+              @include inline-block;
+            }
+
+            p {
+              @include inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //input框样式
+  .template-input {
+    width: 85%;
+    height: 400px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: -1px 1px 15px #acabab;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 180px;
+
+    .gp-input-tt {
+      border-left: 8px solid #ed8156;
+      margin-left: 20px;
+      margin-top: 30px;
+      position: relative;
+
+      span {
+        font-size: 18px;
+        margin-left: 10px;
+      }
+    }
+
+    //gp-input-content填写框
+    .gp-input-content {
+      position: relative;
+      margin-top: 20px;
+
+      .gp-input {
+        width: 240px;
+        margin: 0px auto;
+        border-bottom: .5px solid #999999;
+        margin-top: 12px;
+        padding-bottom: 1px;
+
+        span {
+          font-size: 14px;
+          @include inline-block;
+        }
+
+        input {
+          border: none;
+          //border-bottom: .5px solid #999999;
+          height: 30px;
+          width: 170px;
+          color: #333333;
+          padding-left: 5px;
+          font-size: 12px;
+          @include inline-block;
+        }
+      }
+    }
+
+    //input-btn确定按钮
+    .input-btn {
+      width: 72%;
+      height: 45px;
+      border-radius: 8px;
+      text-align: center;
+      line-height: 45px;
+      position: relative;
+      margin: 25px auto;
+
+      h5 {
+        color: #FFFFFF;
+        font-size: 16px;
+        text-align: center;
+      }
+    }
+
+    //foot-telephone400电话
+    .foot-telephone {
+      p {
+        text-align: center;
+      }
+
+    }
+  }
+
+  .template-input-two {
+    top: 600px;
+  }
+}
+
+//template-page其他页面样式
+.template-page {
+  position: relative;
+  width: 80%;
+  @include inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 70px;
+
+  .template-page-content {
+    text-align: center;
+
+    img {
+      width: 160px;
+      margin: 10px 0;
+    }
+
+    p {
+      font-size: 14px;
+      color: #333333;
+      text-align: center;
+    }
+  }
+
+  .page-btn {
+    width: 55%;
+    height: 40px;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 40px;
+    margin: 20px 0;
+    position: relative;
+    @include inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+
+    h5 {
+      font-size: 14px;
+      color: #FFFFFF;
+      @include inline-block;
+    }
+  }
+}
+
+
+//提交页面颜色
+.gp-input-tt-blue {
+  border-left: 8px solid #3F51B5 !important;
+}
+
+.gp-input-tt-green {
+  border-left: 8px solid #009688 !important;
+}
+
+.gp-input-tt-red {
+  border-left: 8px solid #F44336 !important;
+}
+
+//企业注册
+.company-registration-bg {
+  background: url("../img/company-registration-bg.jpg") no-repeat center;
+  background-size: cover;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 730px;
+
+  .input-wrapper {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    top: 0;
+
+    .input-content {
+      position: relative;
+      top: 270px;
+
+      .input-item {
+        width: 70%;
+        margin: 0 auto;
+        position: relative;
+        text-align: center;
+
+        input, textarea {
+          width: 100%;
+          font-size: 16px;
+          color: #333333;
+          margin: 0 auto;
+          box-sizing: border-box;
+          padding-left: 55px;
+        }
+
+        .input-login {
+          height: 45px;
+          border: 1px solid #0096ff;
+          box-shadow: 0 2px 2px #78c5fc;
+          position: relative;
+        }
+
+        img {
+          width: 25px;
+          border-right: 2px solid #0096ff;
+          padding-right: 10px;
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          z-index: 999;
+        }
+
+        .input-writing {
+          height: 150px;
+          width: 100%;
+          padding-top: 10px;
+        }
+      }
+
+      .put-btn {
+        width: 70%;
+        height: 45px;
+        background-color: #0096ff;
+        border-radius: 8px;
+        margin: 0 auto;
+        font-size: 18px;
+        color: white;
+        text-align: center;
+        line-height: 45px;
+        font-weight: 500;
+      }
+      .put-btn-top{
+        margin-top: 10px;
+      }
+
+    }
+
+    .telephone {
+      margin-top: 280px;
+
+      p {
+        text-align: center;
+        font-size: 14px;
+      }
+
+    }
+  }
+}
+
+//合作伙伴
+.cooperative-partner-bg{
+  background: url("../img/cooperative-partner-bg.jpg") no-repeat center;
+  background-size: cover;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1100px;
+  padding: 80px 0 ;
+  .cooperative-partner-content{
+    position: relative;
+    top: 670px!important;
+  }
+  .telephone{
+    margin-top: 700px!important;
+  }
+}

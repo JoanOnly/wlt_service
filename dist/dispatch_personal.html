@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>调度中心</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toIndex()">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <!--<div class="return-font">-->
+        <!--<p>进入首页</p>-->
+        <!--<img src="img/gp-btn.png">-->
+        <!--</div>-->
+    </div>
+</div>
+<!--template-background公共样式-->
+<div class="template-background">
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p class="font-size">用户名称</p>
+            </div>
+            <div class="weui-cell__ft" id="name"></div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p class="font-size">联系电话</p></div>
+            <div href="tel:4008001234" class="weui-cell__ft" id="phone"></div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p class="font-size">用户类型</p></div>
+            <div href="tel:4008001234" class="weui-cell__ft" id="role"></div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p class="font-size">所属公司</p></div>
+            <div href="tel:4008001234" class="weui-cell__ft" id="company"></div>
+        </div>
+        <div class="weui-cell" id="login-out">
+            <div class="weui-cell__bd">
+                <p class="weui-btn background-color-red">退出登录</p></div>
+            <div href="tel:4008001234" class="weui-cell__ft" id=""></div>
+        </div>
+    </div>
+    <!--底部导航栏-->
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toDispatchList()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">主页</p>
+        </a>
+        <a onclick="toDispatchAdd()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/publish.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">发布</p>
+        </a>
+        <a onclick="toDispatchPersonal()" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+</body>
+<script>
+    $(function () {
+        //验证是否登陆
+        queryDispacherInformation();
+
+        $("#login-out").click(function () {
+            $.ajax({
+                type: "POST",                      //请求类型
+                url: config.SERVICE_PATH + "/weChatDriver/loginOut",  //URL
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        $.toptip("退出登录成功！", "success");
+                        window.location.href = 'dispatch_login.html';
+                    }
+                }
+            });
+        });
+
+        //查询调度信息
+        function queryDispacherInformation() {
+            config.$ajax({
+                url: config.SERVICE_PATH + "/weChatDispatch/getInformation",  //URL
+                type: 'POST',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        //查询并绑定数据
+                        $("#name").text(result.data.userName);
+                        $("#phone").text(result.data.userPhone);
+                        $("#role").text(result.data.userType);
+                        $("#company").text(result.data.companyName);
+                    }
+                }
+            });
+        }
+    });
+</script>
+</html>

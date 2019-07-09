@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>电话api</title>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<p>手机号码归属地测试，</p>
+<p>例如：传入参数tel=13707588152</p>
+<p>返回结果：海南海口移动</p>
+<p>效果请查看控制台。</p>
+</body>
+<script>
+    $(function () {
+        let _tel = '13707588152';
+        $.getJSON("/api/mobileCallerloc", {tel: _tel}, function (res) {
+            console.info(res);
+            console.info(_tel + "归属地：" + res.data)
+        });
+    });
+</script>
+</html>

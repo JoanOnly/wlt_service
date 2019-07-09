@@ -1,0 +1,42 @@
+@charset "UTF-8";
+/*
+  * Author: 云手
+  * GitHub: https://github.com/CloudHand233/ch233-not.included---
+  * LastUpdate: 2017.Aug.25th
+  * Version: 3.0.0
+*/
+
+/* import
+   ========================================================================== */
+@import "../core/mixins";
+@import "../core/colors";
+
+/* pagination
+   ========================================================================== */
+.pagination {
+  @include element-space(.8rem 0);
+  li {
+    @include element-size(1.8rem);
+    @include element-horizontally(1.8rem);
+    @include element-space(0 .4rem);
+    @include inline-block();
+    background: rgba($color-blue-grey700,.87);
+    @include element-text(.7,rgba(255,255,255,.54));
+    @include element-link(rgba(255,255,255,.54));
+    @include border-radius(100%);
+    text-align: center;
+    i {
+      @include element-horizontally(1.8rem);
+    }
+    a {
+      @include element-size(100%,100%);
+      cursor: pointer;
+    }
+    &:hover {
+      background: rgba($color-blue-grey700,1);
+    }
+    &.current {
+      background: rgba($color-blue-grey700,.54);
+    }
+  }
+}

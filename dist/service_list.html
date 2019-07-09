@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>物流通_增值服务</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-return公共样式-->
+<div class="template-return" onclick="toIndex()">
+    <div class="head-logo">
+        <img src="img/head-logo.png">
+        <h5>智慧物流通</h5>
+    </div>
+    <div class="return-font">
+        <p>进入首页</p>
+        <img src="img/gp-btn.png">
+    </div>
+</div>
+<!--template-background公共样式-->
+<div class="template-background padding-bottom-navigation-bar">
+    <!--template-banner公共banner样式-->
+    <div class="template-banner">
+        <img src="img/banner-service.jpg">
+    </div>
+    <!--service-content服务内容-->
+    <div class="service-list">
+        <div class="template-service">
+            <div class="service-content" onclick="toDriverList()">
+                <div class="service-img">
+                    <img src="img/service-one.png">
+                </div>
+                <div class="service-tt">
+                    <h5>找货</h5>
+                    <span>Find&nbsp;goods</span>
+                    <p>车主找货、资源丰富、操作便捷</p>
+                </div>
+                <a class="service-btn">
+                    <img src="img/gp-btn.png">
+                </a>
+            </div>
+        </div>
+        <div class="template-service" onclick="toBuild()">
+            <div class="service-content">
+                <div class="service-img">
+                    <img src="img/service-two.png">
+                </div>
+                <div class="service-tt">
+                    <h5>找车</h5>
+                    <span>Find&nbsp;a&nbsp;car</span>
+                    <p>货主找车、节约时间、多家可选</p>
+                </div>
+                <a class="service-btn">
+                    <img src="img/gp-btn.png">
+                </a>
+            </div>
+        </div>
+        <div class="template-service" onclick="toReview()">
+            <div class="service-content">
+                <div class="service-img">
+                    <img src="img/service-three.png">
+                </div>
+                <div class="service-tt">
+                    <h5>检审</h5>
+                    <span>Review</span>
+                    <p>车辆检审、填表即可、线上提交</p>
+                </div>
+                <a class="service-btn">
+                    <img src="img/gp-btn.png">
+                </a>
+            </div>
+        </div>
+        <div class="template-service" onclick="toPayment()">
+            <div class="service-content">
+                <div class="service-img">
+                    <img src="img/service-four.png">
+                </div>
+                <div class="service-tt">
+                    <h5>运费垫付</h5>
+                    <span>Freight&nbsp;payment</span>
+                    <p>垫付运费、资金快速到账</p>
+                </div>
+                <a class="service-btn">
+                    <img src="img/gp-btn.png">
+                </a>
+            </div>
+        </div>
+        <div class="template-service">
+            <div class="service-content" onclick="toInsurance()">
+                <div class="service-img">
+                    <img src="img/service-five.png">
+                </div>
+                <div class="service-tt">
+                    <h5>保险</h5>
+                    <span>Insurance</span>
+                    <p>车险、货运险在线投保、到期提醒</p>
+                </div>
+                <a class="service-btn">
+                    <img src="img/gp-btn.png">
+                </a>
+            </div>
+        </div>
+        <div class="template-service" onclick="toCard()">
+            <div class="service-content">
+                <div class="service-img">
+                    <img src="img/service-six.png">
+                </div>
+                <div class="service-tt">
+                    <h5>油卡</h5>
+                    <span>Oil&nbsp;card&nbsp;service</span>
+                    <p>运输油卡充值，在线充值、快速到账</p>
+                </div>
+                <a class="service-btn">
+                    <img src="img/gp-btn.png">
+                </a>
+            </div>
+        </div>
+        <div class="template-service" onclick="toDriver()">
+            <div class="service-content">
+                <div class="service-img">
+                    <img src="img/service-seven.png">
+                </div>
+                <div class="service-tt">
+                    <h5>消费贷</h5>
+                    <span>Consumer&nbsp;loan</span>
+                    <p>评估司机征信、快速审批司机贷款</p>
+                </div>
+                <a class="service-btn">
+                    <img src="img/gp-btn.png">
+                </a>
+            </div>
+        </div>
+        <div class="template-service" onclick="toCarLoan()">
+            <div class="service-content">
+                <div class="service-img">
+                    <img src="img/service-eight.png">
+                </div>
+                <div class="service-tt">
+                    <h5>购车贷</h5>
+                    <span>Car&nbsp;purchase&nbsp;loan</span>
+                    <p>指定购车点提供购车贷款</p>
+                </div>
+                <a class="service-btn">
+                    <img src="img/gp-btn.png">
+                </a>
+            </div>
+        </div>
+        <div class="template-service" onclick="toAccount()">
+            <div class="service-content">
+                <div class="service-img">
+                    <img src="img/service-nine.png">
+                </div>
+                <div class="service-tt">
+                    <h5>账户系统</h5>
+                    <span>Account&nbsp;system</span>
+                    <p>线上线下入金、安全快捷</p>
+                </div>
+                <a class="service-btn">
+                    <img src="img/gp-btn.png">
+                </a>
+            </div>
+        </div>
+        <div class="template-service" onclick="toTyre()">
+            <div class="service-content">
+                <div class="service-img">
+                    <img src="img/service-ten.png">
+                </div>
+                <div class="service-tt">
+                    <h5>轮胎</h5>
+                    <span>tyre</span>
+                    <p>购买、更换、安装一步到位</p>
+                </div>
+                <a class="service-btn">
+                    <img src="img/gp-btn.png">
+                </a>
+            </div>
+        </div>
+        <div class="template-service">
+            <div class="service-content" onclick="toCompany()">
+                <div class="service-img">
+                    <img src="img/service-eleven.png">
+                </div>
+                <div class="service-tt">
+                    <h5>企业授信</h5>
+                    <span>Enterprise&nbsp;credit</span>
+                    <p>企业授信、运费垫付</p>
+                </div>
+                <a class="service-btn">
+                    <img src="img/gp-btn.png">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="index-foot">
+        <img src="img/index-foot.png">
+    </div>
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toIndex()" class="weui-tabbar__item">
+            <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a onclick="toServiceList()" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <img src="img/product-list.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">产品</p>
+        </a>
+        <a onclick="toDriverMy()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+</body>
+</html>

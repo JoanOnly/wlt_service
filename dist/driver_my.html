@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>我的</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background">
+    <div class="template-return" onclick="toIndex()">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <div class="return-font">
+            <p>进入首页</p>
+            <img src="img/gp-btn.png">
+        </div>
+    </div>
+    <!--template-return公共样式-->
+    <div class="personal" onclick="toPersonalCenterLook()">
+        <div class="personal-bg">
+            <img src="img/personal-bg.jpg">
+        </div>
+        <!--司机姓名-->
+        <div class="personal-tt"></div>
+    </div>
+</div>
+<!--template-background公共样式-->
+<div class="template-background padding-bottom-navigation-bar">
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell template-return" onclick="toBuild()">
+            <div class="weui-cell__hd font-size personal-img"><img src="img/persona.png"></div>
+            <div class="weui-cell__bd" onclick="">
+                <p class="font-size black-font">我的账户</p>
+            </div>
+            <div class="weui-cell__ft return-font">
+                <img src="img/gp-btn.png">
+            </div>
+        </div>
+        <div class="weui-grids">
+            <a href="javascript:;" class="weui-grid js_grid">
+                <div class="weui-grid__icon dispatch-my-personal">0</div>
+                <p class="weui-grid__label">待付订单</p>
+            </a>
+            <a href="javascript:;" class="weui-grid js_grid">
+                <div class="weui-grid__icon dispatch-my-personal">0</div>
+                <p class="weui-grid__label">待收订单</p>
+            </a>
+            <a href="javascript:;" class="weui-grid js_grid">
+                <div class="weui-grid__icon dispatch-my-personal">0</div>
+                <p class="weui-grid__label">累计收益(元)</p>
+            </a>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd" onclick="toDriverMyList()">
+                <p class="font-size black-font">我的订单</p>
+            </div>
+            <div class="weui-cell__ft return-font">
+                <img src="img/gp-btn.png">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd font-size personal-img"><img src="img/personal-single.png"></div>
+            <div class="weui-cell__bd">
+                <p class="font-size">抢单</p>
+            </div>
+            <div class="weui-cell__ft" id="snatch_num">0</div>
+        </div>
+        <!--<div class="weui-cell">-->
+        <!--<div class="weui-cell__hd font-size personal-img"><img src="img/personal-conduct.png"></div>-->
+        <!--<div class="weui-cell__bd">-->
+        <!--<p class="font-size">进行</p>-->
+        <!--</div>-->
+        <!--<div class="weui-cell__ft">2</div>-->
+        <!--</div>-->
+        <div class="weui-cell">
+            <div class="weui-cell__hd font-size personal-img"><img src="img/personal-complete.png"></div>
+            <div class="weui-cell__bd">
+                <p class="font-size">完成</p>
+            </div>
+            <div class="weui-cell__ft" id="finish_num">0</div>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd" onclick="toBuild()">
+                <p class="font-size black-font">我的专属</p>
+            </div>
+            <div class="weui-cell__ft return-font">
+                <img src="img/gp-btn.png">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd font-size personal-img"><img src="img/personal-insurance.png"></div>
+            <div class="weui-cell__bd">
+                <p class="font-size">保险服务</p>
+            </div>
+            <div class="weui-cell__ft" id="assurance_num">0</div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd font-size personal-img"><img src="img/personal-money.png"></div>
+            <div class="weui-cell__bd">
+                <p class="font-size">贷款服务</p>
+            </div>
+            <div class="weui-cell__ft" id="loan_num">0</div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd font-size personal-img"><img src="img/personal-inspect.png"></div>
+            <div class="weui-cell__bd">
+                <p class="font-size">检审服务</p>
+            </div>
+            <div class="weui-cell__ft" id="vet_num">0</div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd font-size personal-img"><img src="img/personal-oil-card.png"></div>
+            <div class="weui-cell__bd">
+                <p class="font-size">油卡服务</p>
+            </div>
+            <div class="weui-cell__ft" id="oil_card_num">0</div>
+        </div>
+    </div>
+    <div class="weui-cells weui-panel">
+        <div class="weui-cell template-return">
+            <div class="weui-cell__bd" onclick="toBuild()">
+                <p class="font-size black-font">其他</p>
+            </div>
+            <div class="weui-cell__ft return-font">
+                <img src="img/gp-btn.png">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd font-size personal-img"><img src="img/personal-business.png"></div>
+            <div class="weui-cell__bd">
+                <p class="font-size">商家服务</p>
+            </div>
+            <div class="weui-cell__ft" id="business_num">0</div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd font-size personal-img"><img src="img/personal-telephone.png"></div>
+            <div class="weui-cell__bd">
+                <p class="font-size">联系客服</p></div>
+            <a href="tel:4008001234" class="weui-cell__ft">4008-084-411</a>
+        </div>
+    </div>
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toIndex()" class="weui-tabbar__item">
+            <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a onclick="toServiceList()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/find-goods.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">产品</p>
+        </a>
+        <a onclick="toDriverMy()" class="weui-tabbar__item weui-bar__item--on">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+</body>
+<!--用户信息模板-->
+<script id="userInfo" type="text/html">
+    <h5>{{config.isEmpty(userName)?"未登录":userName}}</h5>
+    <p>hi，您好！</p>
+    <div class="weui-cell__ft gp-btn">
+        <img src="img/gp-btns.png">
+    </div>
+</script>
+<script>
+    //从微信公众号驾驶员入口直接进入接收openid并判断是否登录
+    var openID = config.getUrlParam(document.location, "openid");
+    if (openID != null) {
+        store.set('openid', openID);
+        $(function () {
+            isLogin();
+        });
+    }
+
+    // 渲染用户信息
+    let data = store.get(config.USER_KEY);
+    let html = template("userInfo", data);
+    $(".personal-tt").html(html);
+
+    // 渲染消息数量
+    let contData = {
+        snatchNum: 0, finishNum: 0, assuranceNum: 0,
+        loanNum: 0, vetNum: 0, oilCardNum: 0, businessNum: 0
+    };
+    $("#snatch_num").text(config.prettifyNumber(contData.snatchNum));
+    $("#finish_num").text(config.prettifyNumber(contData.finishNum));
+    $("#assurance_num").text(config.prettifyNumber(contData.assuranceNum));
+    $("#loan_num").text(config.prettifyNumber(contData.loanNum));
+    $("#vet_num").text(config.prettifyNumber(contData.vetNum));
+    $("#oil_card_num").text(config.prettifyNumber(contData.oilCardNum));
+    $("#business_num").text(config.prettifyNumber(contData.businessNum));
+</script>
+</html>

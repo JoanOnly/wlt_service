@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>订单详情</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toIndex()">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+        <!--<div class="return-font">-->
+            <!--<p>进入首页</p>-->
+            <!--<img src="img/gp-btn.png">-->
+        <!--</div>-->
+    </div>
+</div>
+<!--template-background公共样式-->
+<div class="template-background">
+    <!--/填坑位置-->
+    <div class="orderParticulars"></div>
+
+    <!--底部导航栏-->
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toDispatchList()" class="weui-tabbar__item">
+            <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">主页</p>
+        </a>
+        <a onclick="toDispatchAdd()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/publish.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">发布</p>
+        </a>
+        <a onclick="toDispatchPersonal()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+
+</body>
+<script>
+        let id = store.get(allParam.ORDER_ID);
+        // console.log("=====" + id);
+
+        $(function () {
+            // 验证表单
+            function validate() {
+                return $("#saveForm").validate({
+                    rules: {
+                        gmtStartTransport: 'required', //发货日期
+                        lineStart: 'required', //起始地
+                        lineEnd: 'required', //目的地
+                        goodsName: 'required', //货物名称
+                        totalTon: { //吨位总数
+                            required: true,
+                            number: true
+                        },
+                        shipperName: { //货主名称
+                            required: true
+                        },
+                        carNumberRequired: { //车辆数
+                            required: true,
+                            number: true
+                        },
+                        freightUnitPrice: { //运费单价
+                            required: true,
+                            number: true
+                        },
+                        updateOrderStatus: { //上下架
+                            required: true
+                        },
+                        dispatchPhone: { //调度电话
+                            required: true,
+                            number: true
+                        },
+                    },
+                    messages: {
+                        gmtStartTransport: {
+                            required: '请填写发货日期'
+                        },
+                        lineStart: {
+                            required: '请填写起始地'
+                        },
+                        lineEnd: {
+                            required: '请填写目的地'
+                        },
+                        goodsName: {
+                            required: '请填写货物名称'
+                        },
+                        totalTon: {
+                            required: '请填写吨位总数',
+                            number: '吨位总数格式不正确'
+                        },
+                        shipperName: {
+                            required: '请填写货主名称'
+                        },
+                        carNumberRequired: {
+                            required: '请填写所需车辆',
+                            number: '车辆不正确'
+                        },
+                        freightUnitPrice: {
+                            required: '请填写运费单价',
+                            number: '运费单价格式不正确'
+                        },
+                        updateOrderStatus: {
+                            required: '请勾选上下架'
+                        },
+                        dispatchPhone: {
+                            required: '请填写电话',
+                            number: '电话格式不正确'
+                        }
+                    }
+                });
+            }
+
+            ready();
+
+            // 页面渲染
+            function renderDispatchWaybillParticulars(data) {
+                var html = template("dispatch_waybill_particulars_template", data);
+                $('.orderParticulars').append(html);
+            }
+
+
+            function ready() {
+                config.$ajax({
+                    url: config.SERVICE_PATH + "/weChatDispatch/longDistanceOrderInfo/" + id,  //URL
+                    // data: $("#saveForm").serialize(),
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data.data);
+                        renderDispatchWaybillParticulars(data.data);
+                        if (data.data.orderStatus == 0) {
+                            $("#up").click();
+                        } else {
+                            $("#down").click();
+                        }
+                    },
+                    error: function (data) {
+                        $.alert("系统繁忙，请稍后重试！" + data.code);
+                    }
+                });
+            }
+
+            //更新订单
+            $(document).on('click', "#updateOrder", function () {
+                if (validate().form()) {
+                    config.$ajax({
+                        url: config.SERVICE_PATH + "/weChatDispatch/updatOrderInfo",  //URL
+                        type: 'POST',
+                        data: $("#saveForm").serialize(),
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.success) {
+                                $.toast("修改成功");
+                                //  window.location.href = 'dispatch_waybill_particulars.html';
+                            } else {
+                                $.alert(result.msg);
+
+                            }
+                        },
+                        error: function (data) {
+                            $.alert("系统繁忙，请稍后重试！" + data.msg);
+                        }
+                    });
+                }
+                return false;
+            });
+
+
+            //修改订单状态删除
+            $(document).on('click', ".delOrder", function () {
+                config.$ajax({
+                    url: config.SERVICE_PATH + "/weChatDispatch/updateOrderStatusIsDelete",  //URL
+                    type: 'POST',
+                    data: {id: id},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.success) {
+                            $.toast("删除成功");
+                            window.location.href = 'dispatch_order_list.html';
+                        } else {
+                            $.alert(data.msg);
+                        }
+
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        $.alert("系统繁忙，请稍后重试！" + data.code);
+                    }
+                });
+
+            })
+        });
+</script>
+<script id="dispatch_waybill_particulars_template" type="text/html">
+    <form id="saveForm">
+        <input type="hidden" name="id" value="{{id}}">
+        <!--装货日期-->
+        <div class="weui-panel weui-panel_access weui-cell">
+            <div class="weui-cell__hd font-size"><label class="weui-label">发货日期:</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="date" name="gmtStartTransport" value="{{gmtStartTransport}}" placeholder="请输入发货日期">
+            </div>
+        </div>
+        <!--起点，终点-->
+        <div class="weui-cells weui-panel">
+            <div class="weui-cell">
+                <div class="weui-cell__hd left-icon"><img class="small-icon-img" src="img/starting_point.png"></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="lineStart" value="{{lineStart}}" placeholder="请输入起始地">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd left-icon"><img class="small-icon-img" src="img/destination.png"></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="lineEnd" value="{{lineEnd}}" placeholder="请输入目的地">
+                </div>
+            </div>
+        </div>
+        <!--货物信息-->
+        <div class="orderParticulars"></div>
+        <div class="weui-cells weui-cells_form weui-panel">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">货物名称</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="goodsName" value="{{goodsName}}" placeholder="请输入货物名称">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">吨位总数</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="totalTon" value="{{totalTon}}" placeholder="请输入吨位总数">
+                </div>
+                <span>吨</span>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">货主名称</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="shipperName" value="{{shipperName}}" placeholder="请输入货主名称">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">所需车辆</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="carNumberRequired" value="{{carNumberRequired}}" placeholder="请输入所需车辆">
+                </div>
+                <span>辆</span>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form weui-panel">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">运费单价</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="freightUnitPrice" value="{{freightUnitPrice}}" placeholder="请输入运费单价">
+                </div>
+                <span>元</span>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form weui-panel">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">备注</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="orderRemarks" value="{{orderRemarks}}" placeholder="请输入备注">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_checkbox flex">
+            <label class="weui-cell weui-check__label flex-label">
+                <div class="weui-cell__bd">
+                    <input id="up" type="radio" class="weui-check" name="orderStatus" value="0">
+                    <span class="weui-icon-checked"></span>
+                </div>
+                <div>
+                    <label class="weui-label font-size">上架</label>
+                </div>
+            </label>
+            <label class="weui-cell weui-check__label flex-label">
+                <div class="weui-cell__bd">
+                    <input id="down" type="radio" name="orderStatus" value="1" class="weui-check" >
+                    <span class="weui-icon-checked"></span>
+                </div>
+                <div>
+                    <label class="weui-label font-size">下架</label>
+                </div>
+            </label>
+        </div>
+        <div class="weui-cells weui-panel">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">物流公司</label></div>
+                <div class="weui-cell__bd">
+                    <span class="weui-input">{{companyName}}</span>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label font-size">联系调度</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input regPhone" placeholder="请输入电话" name="dispatchPhone" value="{{dispatchPhone}}">
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--下架、删除按钮-->
+    <div class="dispatch-waybill-btn">
+        <button id="updateOrder" class="weui-btn dispatch-btn-blues">保存</button>
+        <button class="weui-btn dispatch-btn-red delOrder">删除</button>
+    </div>
+    <!--调度详情页二维码-->
+    <div style="padding: 10px 0;background-color: #fff;">
+        <div class="foot-timg">
+            <img src="/static/orderQrcode/{{id}}.png">
+            <p>长按保存二维码，发送司机进行抢单</p>
+        </div>
+    </div>
+</script>
+</html>

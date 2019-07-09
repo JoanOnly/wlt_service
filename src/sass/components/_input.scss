@@ -1,0 +1,298 @@
+@charset "UTF-8";
+/*
+  * Author: 云手
+  * GitHub: https://github.com/CloudHand233/ch233-not.included---
+  * LastUpdate: 2017.Aug.25th
+  * Version: 3.0.0
+*/
+
+/* import
+   ========================================================================== */
+@import "../core/mixins";
+@import "../core/colors";
+
+/* input
+   ========================================================================== */
+.input-text {
+  @include element-size();
+  @include element-text(.7,rgba(0,0,0,.87));
+  @include element-horizontally(2.1rem);
+  @include element-space(.8rem .6rem,0 .5rem);
+  display: block;
+  @include border-radius(.3rem);
+  border: .05rem solid rgba(0,0,0,.26);
+  input {
+    @include element-size(96%);
+    @include element-psi-absolute(0,0,0,0);
+    display: block;
+    @include element-horizontally(2.1rem);
+    @include element-space(0,0 2%);
+    border: none;
+    @include border-radius(.4rem);
+  }
+}
+
+.input-icon {
+  @extend .input-text;
+  i {
+    @include element-psi-absolute(0,null,0,.5rem);
+    @include element-horizontally(2.1rem);
+    @include element-space(0,0);
+    display: block;
+    z-index: 99;
+    color: rgba(0,0,0,.54);
+  }
+  input {
+    @include element-size(98%);
+    @include element-psi-absolute(0,0,0,0);
+    display: block;
+    @include element-horizontally(2.1rem);
+    @include element-space(0,0 2% 0 0);
+    border: none;
+    text-indent: 3em;
+    @include border-radius(.4rem);
+  }
+}
+/* select
+   ========================================================================== */
+.selector {
+  @include element-size();
+  @include element-text(.7,rgba(0,0,0,.87));
+  @include element-horizontally(2.1rem);
+  @include element-space(.8rem .6rem,0 .5rem);
+  display: block;
+  @include border-radius(.3rem);
+  border: .05rem solid rgba(0,0,0,.26);
+  select {
+    @include element-size(98%);
+    @include element-psi-absolute(0,0,0,0);
+    display: block;
+    @include element-horizontally(2.1rem);
+    @include element-space(0 1%,0);
+    border: none;
+    @include border-radius(.4rem);
+    outline: none;
+    background: none;
+  }
+}
+
+.selector-icon {
+  @extend .selector;
+  i {
+    @include element-psi-absolute(0,null,0,.5rem);
+    @include element-horizontally(2.1rem);
+    @include element-space(0,0);
+    display: block;
+    z-index: 99;
+    color: rgba(0,0,0,.54);
+  }
+  select {
+    @include element-size(98%);
+    @include element-psi-absolute(0,0,0,0);
+    display: block;
+    @include element-horizontally(2.1rem);
+    @include element-space(0,0 2% 0 0);
+    border: none;
+    text-indent: 2.5em;
+    @include border-radius(.4rem);
+    outline: none;
+    background: none;
+  }
+}
+// form elements inline-block
+.form-inline {
+  display: inline-block!important;
+  vertical-align: middle!important;
+  *vertical-align: auto!important;
+  *zoom: 1!important;
+  *display: inline!important;
+}
+/* textarea
+   ========================================================================== */
+.textarea {
+  @include element-size();
+  min-height: 5rem;
+  @include element-text(.7,rgba(0,0,0,.87));
+  @include element-space(.8rem .6rem,.5rem);
+  display: block;
+  @include border-radius(.3rem);
+  border: .05rem solid rgba(0,0,0,.26);
+  textarea {
+    @include element-size(98%);
+    @include element-psi-absolute(0,0,0,0);
+    display: block;
+    @include element-space(0 1%,.5rem 0);
+    border: none;
+    @include border-radius(.4rem);
+    outline: none;
+    background: none;
+    resize: none;
+  }
+}
+/* radio
+   ========================================================================== */
+.radio {
+  @include element-size();
+  @include element-text(.7,rgba(0,0,0,.87));
+  @include element-horizontally(2.1rem);
+  @include element-space(.8rem .6rem,0 .5rem);
+  display: block;
+  @include border-radius(.3rem);
+  label {
+    @include inline-block();
+    cursor: pointer;
+  }
+  input {
+    @include inline-block();
+    cursor: pointer;
+    @include element-space(0 .25rem,0);
+  }
+  span {
+    @include inline-block();
+  }
+}
+.radio-icon {
+  @include element-size();
+  @include element-text(.7,rgba(0,0,0,.87));
+  @include element-horizontally(2.1rem);
+  @include element-space(.8rem .6rem,0 .5rem);
+  display: block;
+  @include border-radius(.3rem);
+  label {
+    @include inline-block();
+    cursor: pointer;
+  }
+  input {
+    @include inline-block();
+    cursor: pointer;
+    @include element-space(0 .25rem,0);
+    display: none;
+  }
+  i {
+    @include inline-block();
+    cursor: pointer;
+    @include element-space(0 .25rem,0);
+  }
+  span {
+    @include inline-block();
+  }
+}
+/* checkbox
+   ========================================================================== */
+.checkbox {
+  @include element-size();
+  @include element-text(.7,rgba(0,0,0,.87));
+  @include element-horizontally(2.1rem);
+  @include element-space(.8rem .6rem,0 .5rem);
+  display: block;
+  @include border-radius(.3rem);
+  label {
+    @include inline-block();
+    cursor: pointer;
+  }
+  input {
+    @include inline-block();
+    cursor: pointer;
+    @include element-space(0 .25rem,0);
+  }
+  span {
+    @include inline-block();
+  }
+}
+.checkbox-icon {
+  @include element-size();
+  @include element-text(.7,rgba(0,0,0,.87));
+  @include element-horizontally(2.1rem);
+  @include element-space(.8rem .6rem,0 .5rem);
+  display: block;
+  @include border-radius(.3rem);
+  label {
+    @include inline-block();
+    cursor: pointer;
+  }
+  input {
+    @include inline-block();
+    cursor: pointer;
+    @include element-space(0 .25rem,0);
+    display: none;
+  }
+  i {
+    @include inline-block();
+    cursor: pointer;
+    @include element-space(0 .25rem,0);
+  }
+  span {
+    @include inline-block();
+  }
+}
+/* switch
+   ========================================================================== */
+.switch {
+  @include element-size(2.3rem);
+  @include element-text(.7,rgba(0,0,0,.87));
+  @include element-horizontally(1.7rem);
+  @include element-space(1rem .6rem,0 .3rem);
+  display: block;
+  @include border-radius(2.1rem);
+  background: rgba(0,0,0,.54);
+  cursor: pointer;
+  label {
+    @include element-psi-absolute(0,0,0,0);
+    @include inline-block();
+    cursor: pointer;
+  }
+  @at-root {
+    .switch-on {
+      background: rgba($color-green,.87);
+    }
+  }
+  input {
+    @include inline-block();
+    cursor: pointer;
+    @include element-space(0 .25rem,0);
+    display: none;
+  }
+  span {
+    content: '';
+    @include element-size(1.25rem,1.25rem);
+    @include element-psi-absolute(.2rem,null,null,.3rem);
+    background: rgba(255,255,255,.87);
+    @include border-radius(100%);
+    text-indent: -9999px;
+  }
+}
+// form groups
+.form-gp {
+  position: relative;
+  @include element-space(.2rem .4rem,.4rem);
+  display: block;
+  .radio {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .checkbox {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+.form-gp-inline {
+  position: relative;
+  @include element-space(.2rem .4rem,.4rem);
+  display: inline-block!important;
+  vertical-align: middle!important;
+  *vertical-align: auto!important;
+  *zoom: 1!important;
+  *display: inline!important;
+}
+// focus on
+.focus-on {
+  @include element-border(.05rem solid rgba($color-primary500,.54));
+  i {
+    color: rgba($color-primary500,.87);
+  }
+}
+.default-form-text {
+  input,textarea {
+    color: rgba(0,0,0,.26);
+  }
+}

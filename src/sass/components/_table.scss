@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/*
+  * Author: 云手
+  * GitHub: https://github.com/CloudHand233/ch233-not.included---
+  * LastUpdate: 2017.Aug.25th
+  * Version: 3.0.0
+*/
+
+/* import
+   ========================================================================== */
+@import "../core/mixins";
+@import "../core/colors";
+
+/* table
+   ========================================================================== */
+
+tbody {
+  @include element-space(0,0);
+}
+
+.table {
+  @include element-size();
+  @include element-space(.8rem .6rem);
+  table {
+    width: 100%;
+    min-width: 10rem;
+    @include element-space(0,0);
+    //@include element-border(null,.05rem solid $color-grey400,null,null,.05rem solid $color-grey400);
+    border-collapse: collapse;
+    tr {
+      @include element-space(0,0);
+      td {
+        @include element-space(0,.25rem);
+        @include element-border(.05rem solid $color-grey400);
+        @include element-text(.7,rgba(0,0,0,.54));
+        display: table-cell!important;
+        &.td-tt {
+          @include element-text(.7,rgba(0,0,0,.87));
+          background: $color-grey300;
+        }
+      }
+      &:hover {
+        background: $color-amber50;
+        td {
+          color: rgba(0,0,0,.87);
+        }
+        .td-tt {
+          background: $color-grey300;
+        }
+      }
+    }
+  }
+}

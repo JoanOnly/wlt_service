@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- touch meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>调度登录</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css?_r_t=1.0.0">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/js-cookie/latest/js.cookie.min.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js"></script>
+    <script type="text/javascript" src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript" src="js/common.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/config.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/all-param.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/wechat-driver-login.js?_r_t=1.0.0"></script>
+    <script type="text/javascript" src="js/regular.js?_r_t=1.0.0"></script>
+</head>
+<body>
+<div class="dispatch-login-wrapper">
+    <div class="login-wrapper">
+        <div class="login-tt">
+            <h5>调度登录</h5>
+            <i>Login</i>
+        </div>
+        <div class="dispatch-table">
+            <div class="dispatch-login">
+                <img src="img/login.png" alt=""/>
+                <input id="loginName" type="text" placeholder="输入用户名"/>
+            </div>
+            <div class="dispatch-login dispatch-password">
+                <img src="img/password.png" alt=""/>
+                <input id="loginPwd" type="password" placeholder="输入用户密码"/>
+            </div>
+            <div class="login-btn">
+                <a href="javascript:;" class="weui-btn btn-orange">登&nbsp;录</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(function () {
+        //获取openid登录
+        isLogin();
+        //进入页面验证是否登陆
+        dispacherIsLogin();
+
+        // 获取微信的openid
+        let openid = config.getUrlParam(document.location, allParam.OPEN_ID);
+        if (config.isEmpty(openid)) {
+            openid = store.get(allParam.OPEN_ID);
+            if (config.isEmpty(openid)) {
+                 $.alert("微信openid获取失败！");
+                // store.set(allParam.OPEN_ID,"o7ftO1VdqYIGOgeiQRFiRlJzOgg");
+            }
+        } else {
+            store.set(allParam.OPEN_ID, openid);
+        }
+
+        // 判断cookie中是否存在登录信息
+        (function () {
+            let _username = Cookies.get("username");
+            let _password = Cookies.get("password");
+            if (!config.isEmpty(_username) && !config.isEmpty(_password)) {
+                $("#loginName").val(_username);
+                $("#loginPwd").val(_password);
+            }
+        })();
+
+        //登录按钮
+        $(document).on('click', '.login-btn', function () {
+            console.log('来了 老弟');
+            var loginName = $("#loginName").val();
+            var loginPwd = $("#loginPwd").val();
+            /*
+            var loginName="17621235689"
+            var loginPwd="123123"
+            */
+            // console.log(loginName + "___" + loginPwd);
+            //判断是否为空
+            if (loginName == null || loginName === "") {
+                $.toptip("用户名不能为空！", "error");
+                return false;
+            }
+            if (loginPwd == null || loginPwd === "") {
+                $.toptip("密码不能为空！", "error");
+                return false;
+            }
+            // 通过后直接登录
+            dispatcherLogin(loginName, loginPwd);
+        });
+
+        //登录方法
+        function dispatcherLogin(loginName, loginPwd) {
+            config.$ajax({
+                url: config.SERVICE_PATH + "/weChatDriver/dispatcherLogin",  //URL
+                type: 'POST',
+                data: {'username': loginName, 'password': loginPwd, 'openid': openid},
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        if (!config.isEmpty(result.data)) {
+                            store.remove(config.SESSIONID);
+                            // 登录成功，缓存凭证
+                            store.set(config.SESSION, result.data.sessionInfo);
+                            store.set(config.SESSIONID, result.data.sessionInfo.id);
+                            store.set(config.USER_KEY, result.data.userInfo);
+                            store.set(config.SYS_INFO, result.data.sysInfo);
+                            // 把登录信息存入cookie
+                            rememberUser(loginName, loginPwd);
+                            $.toptip(result.msg, "success");
+                            //跳转到页面
+                            toDispatchList();
+                        }
+                    } else {
+                        $.toptip("登录失败！" + result.msg, "error");
+                    }
+                    return false;
+                },
+                error: function (result) {
+                    $.toptip(result.msg, "error");
+                }
+
+            });
+        }
+
+        //验证调度是否登陆
+        function dispacherIsLogin() {
+            config.$ajax({
+                url: config.SERVICE_PATH + "/weChatDriver/dispatchIsLogin",  //URL
+                type: 'POST',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        //跳转到页面
+                        window.location.href = 'dispatch_order_list.html';
+                    }
+                }
+            });
+        }
+
+        // 记住用户的账号和密码
+        function rememberUser(username, password) {
+            if (!config.isEmpty(username) && !config.isEmpty(password)) {
+                Cookies.set("username", username, config.getCookiesConfig());
+                Cookies.set("password", password, config.getCookiesConfig());
+            }
+        }
+    });
+</script>
+<!--百度统计-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?0d893f9d83e495d0180f59dbf5bdcb2a";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</html>

@@ -1,0 +1,402 @@
+@charset "UTF-8";
+/*
+  * Author: 云手
+  * GitHub: https://github.com/CloudHand233/ch233-not.included---
+  * LastUpdate: 2017.Aug.25th
+  * Version: 3.0.0
+*/
+
+/* import
+   ========================================================================== */
+@import "../core/mixins";
+@import "../core/colors";
+@import "../core/gradients";
+
+/* button
+   ========================================================================== */
+.btn {
+  @include element-size();
+  @include element-text(.7,rgba(255,255,255,.87));
+  @include element-horizontally(1.2rem);
+  @include element-space(.8rem .6rem,.5rem);
+  display: block;
+  text-align: center;
+  @include element-link(rgba(255,255,255,.87));
+  @include border-radius(.3rem);
+  background: rgba(0,0,0,1);
+  a {
+    @include element-size(100%,100%);
+    display: block;
+    cursor: pointer;
+    z-index: 99;
+  }
+  a:hover {
+    @include element-size(100%,100%);
+    z-index: 99;
+  }
+  &:hover {
+    background: rgba(0,0,0,.87);
+  }
+}
+// color match style
+.btn-primary {
+  background: $color-primary500;
+  &:hover {
+    background: rgba($color-primary500,.87);
+  }
+}
+.btn-secondary {
+  background: $color-secondary500;
+  &:hover {
+    background: rgba($color-secondary500,.87);
+  }
+}
+.btn-less {
+  background: $color-lessA700;
+  &:hover {
+    background: rgba($color-lessA700,.87);
+  }
+}
+// //color full style
+// red
+.btn-red {
+  background: $color-red;
+  &:hover {
+    background: rgba($color-red,.87);
+  }
+}
+.btn-redA700 {
+  background: $color-redA700;
+  &:hover {
+    background: rgba($color-redA700,.87);
+  }
+}
+.btn-red100 {
+  background: $color-red100;
+  &:hover {
+    background: rgba($color-red100,.87);
+  }
+}
+// pink
+.btn-pink {
+  background: $color-pink;
+  &:hover {
+    background: rgba($color-pink,.87);
+  }
+}
+.btn-pinkA700 {
+  background: $color-pinkA700;
+  &:hover {
+    background: rgba($color-pinkA700,.87);
+  }
+}
+.btn-pink100 {
+  background: $color-pink100;
+  &:hover {
+    background: rgba($color-pink100,.87);
+  }
+}
+// purple
+.btn-purple {
+  background: $color-purple;
+  &:hover {
+    background: rgba($color-purple,.87);
+  }
+}
+.btn-purpleA700 {
+  background: $color-purpleA700;
+  &:hover {
+    background: rgba($color-purpleA700,.87);
+  }
+}
+.btn-purple100 {
+  background: $color-purple100;
+  &:hover {
+    background: rgba($color-purple100,.87);
+  }
+}
+// deep-purple
+.btn-deep-purple {
+  background: $color-deep-purple;
+  &:hover {
+    background: rgba($color-deep-purple,.87);
+  }
+}
+.btn-deep-purpleA700 {
+  background: $color-deep-purpleA700;
+  &:hover {
+    background: rgba($color-deep-purpleA700,.87);
+  }
+}
+.btn-deep-purple100 {
+  background: $color-deep-purple100;
+  &:hover {
+    background: rgba($color-deep-purple100,.87);
+  }
+}
+// indigo
+.btn-indigo {
+  background: $color-indigo;
+  &:hover {
+    background: rgba($color-indigo,.87);
+  }
+}
+.btn-indigoA700 {
+  background: $color-indigoA700;
+  &:hover {
+    background: rgba($color-indigoA700,.87);
+  }
+}
+.btn-indigo100 {
+  background: $color-indigo100;
+  &:hover {
+    background: rgba($color-indigo100,.87);
+  }
+}
+// blue
+.btn-blue {
+  background: $color-blue;
+  &:hover {
+    background: rgba($color-blue,.87);
+  }
+}
+.btn-blueA700 {
+  background: $color-blueA700;
+  &:hover {
+    background: rgba($color-blueA700,.87);
+  }
+}
+.btn-blue100 {
+  background: $color-blue100;
+  &:hover {
+    background: rgba($color-blue100,.87);
+  }
+}
+// light blue
+.btn-light-blue {
+  background: $color-light-blue;
+  &:hover {
+    background: rgba($color-light-blue,.87);
+  }
+}
+.btn-light-blueA700 {
+  background: $color-light-blueA700;
+  &:hover {
+    background: rgba($color-light-blueA700,.87);
+  }
+}
+.btn-light-blue100 {
+  background: $color-light-blue100;
+  &:hover {
+    background: rgba($color-light-blue100,.87);
+  }
+}
+// cyan
+.btn-cyan {
+  background: $color-cyan;
+  &:hover {
+    background: rgba($color-cyan,.87);
+  }
+}
+.btn-cyanA700 {
+  background: $color-cyanA700;
+  &:hover {
+    background: rgba($color-cyanA700,.87);
+  }
+}
+.btn-cyan100 {
+  background: $color-cyan100;
+  &:hover {
+    background: rgba($color-cyan100,.87);
+  }
+}
+// teal
+.btn-teal {
+  background: $color-teal;
+  &:hover {
+    background: rgba($color-teal,.87);
+  }
+}
+.btn-tealA700 {
+  background: $color-tealA700;
+  &:hover {
+    background: rgba($color-tealA700,.87);
+  }
+}
+.btn-teal100 {
+  background: $color-teal100;
+  &:hover {
+    background: rgba($color-teal100,.87);
+  }
+}
+// green
+.btn-green {
+  background: $color-green;
+  &:hover {
+    background: rgba($color-green,.87);
+  }
+}
+.btn-greenA700 {
+  background: $color-greenA700;
+  &:hover {
+    background: rgba($color-greenA700,.87);
+  }
+}
+.btn-green100 {
+  background: $color-green100;
+  &:hover {
+    background: rgba($color-green100,.87);
+  }
+}
+// light green
+.btn-light-green {
+  background: $color-light-green;
+  &:hover {
+    background: rgba($color-light-green,.87);
+  }
+}
+.btn-light-greenA700 {
+  background: $color-light-greenA700;
+  &:hover {
+    background: rgba($color-light-greenA700,.87);
+  }
+}
+.btn-light-green100 {
+  background: $color-light-green100;
+  &:hover {
+    background: rgba($color-light-green100,.87);
+  }
+}
+// lime
+.btn-lime {
+  background: $color-lime;
+  &:hover {
+    background: rgba($color-lime,.87);
+  }
+}
+.btn-limeA700 {
+  background: $color-limeA700;
+  &:hover {
+    background: rgba($color-limeA700,.87);
+  }
+}
+.btn-lime100 {
+  background: $color-lime100;
+  &:hover {
+    background: rgba($color-lime100,.87);
+  }
+}
+// yellow
+.btn-yellow {
+  background: $color-yellow;
+  &:hover {
+    background: rgba($color-yellow,.87);
+  }
+}
+.btn-yellowA700 {
+  background: $color-yellowA700;
+  &:hover {
+    background: rgba($color-yellowA700,.87);
+  }
+}
+.btn-yellow100 {
+  background: $color-yellow100;
+  &:hover {
+    background: rgba($color-yellow100,.87);
+  }
+}
+// amber
+.btn-amber {
+  background: $color-amber;
+  &:hover {
+    background: rgba($color-amber,.87);
+  }
+}
+.btn-amberA700 {
+  background: $color-amberA700;
+  &:hover {
+    background: rgba($color-amberA700,.87);
+  }
+}
+.btn-amber100 {
+  background: $color-amber100;
+  &:hover {
+    background: rgba($color-amber100,.87);
+  }
+}
+// orange
+.btn-orange {
+  background: $color-orange;
+  &:hover {
+    background: rgba($color-orange,.87);
+  }
+}
+.btn-orangeA700 {
+  background: $color-orangeA700;
+  &:hover {
+    background: rgba($color-orangeA700,.87);
+  }
+}
+.btn-orange100 {
+  background: $color-orange100;
+  &:hover {
+    background: rgba($color-orange100,.87);
+  }
+}
+// deep orange
+.btn-deep-orange {
+  background: $color-deep-orange;
+  &:hover {
+    background: rgba($color-deep-orange,.87);
+  }
+}
+.btn-deep-orangeA700 {
+  background: $color-deep-orangeA700;
+  &:hover {
+    background: rgba($color-deep-orangeA700,.87);
+  }
+}
+.btn-deep-orange100 {
+  background: $color-deep-orange100;
+  &:hover {
+    background: rgba($color-deep-orange100,.87);
+  }
+}
+// grey
+.btn-grey {
+  background: $color-grey;
+  &:hover {
+    background: rgba($color-grey,.87);
+  }
+}
+.btn-grey700 {
+  background: $color-grey700;
+  &:hover {
+    background: rgba($color-grey700,.87);
+  }
+}
+.btn-grey100 {
+  background: $color-grey100;
+  &:hover {
+    background: rgba($color-grey100,.87);
+  }
+}
+// blue grey
+.btn-blue-grey {
+  background: $color-blue-grey;
+  &:hover {
+    background: rgba($color-blue-grey,.87);
+  }
+}
+.btn-blue-grey700 {
+  background: $color-blue-grey700;
+  &:hover {
+    background: rgba($color-blue-grey700,.87);
+  }
+}
+.btn-blue-grey100 {
+  background: $color-blue-grey100;
+  &:hover {
+    background: rgba($color-blue-grey100,.87);
+  }
+}

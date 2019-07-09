@@ -1,0 +1,55 @@
+@charset "UTF-8";
+.service-list {
+  position: relative;
+  .template-service {
+    width: 90%;
+    height: 70px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 3px 4px 5px #dadada;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 10px 0;
+    .service-content {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 20px;
+      .service-img {
+        @include inline-block;
+        width: 55px;
+        position: relative;
+        img {
+          width: 100%;
+        }
+      }
+      .service-tt{
+        @include inline-block;
+        line-height: 16px;
+        position: relative;
+        left: 15px;
+        h5{
+          font-size: 16px;
+        }
+        span{
+          font-size: 12px;
+          text-transform: uppercase;
+        }
+        p{
+          display: block;
+          line-height: 12px;
+        }
+      }
+      .service-btn{
+        position: absolute;
+        width: 12px;
+        right:35px;
+        top: 20px;
+        img{
+          width: 100%;
+        }
+      }
+    }
+  }
+}

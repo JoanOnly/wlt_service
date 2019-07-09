@@ -1,0 +1,81 @@
+@charset "UTF-8";
+.template-background {
+  .wrapper-one {
+    background-color: #0559d6;
+    width: 100%;
+    margin-top: 10px;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+//调度登录界面样式
+.dispatch-login-wrapper {
+  background: url(../img/dispatch-login.jpg) no-repeat;
+  background-position: top center;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  .login-wrapper {
+    position: relative;
+    color: #da6734;
+    width: 70%;
+    //background-color: #00BFA5;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 25%;
+    .login-tt {
+      border-bottom: 1px #e5e4e4 solid;
+      h5 {
+        font-size: 20px;
+        color: #da6734 !important;
+        @include inline-block;
+      }
+      i {
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #999999;
+        margin-left: 8px;
+      }
+    }
+    .dispatch-table{
+      margin-top: 25px;
+      .dispatch-login{
+        position: relative;
+        border: 1px solid #bdbdbd;
+        border-radius: 5px;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        img{
+          width: 18px;
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          @include inline-block;
+        }
+        input{
+          font-size: 16px;
+          margin-left: 35px;
+          width: 80%;
+          @include inline-block;
+          border: none;
+
+        }
+      }
+      .dispatch-password{
+        margin-top: 20px;
+      }
+      .login-btn{
+        margin-top: 28px;
+        a{
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
+}

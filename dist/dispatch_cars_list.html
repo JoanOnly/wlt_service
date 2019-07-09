@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>调派列表</title>
+    <!-- 加载静态css -->
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <!-- 加载动态css -->
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/slider.css">
+    <link type="text/css" rel="stylesheet" href="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/css/ch233.min.css">
+    <link type="text/css" rel="stylesheet" href="css/public.css?_r_t=1.0.0">
+    <!-- 加载静态js -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js" type="text/javascript" ></script>
+    <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js" type="text/javascript" ></script>
+    <script src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js" type="text/javascript"></script>
+    <script src="https://cdn.bootcss.com/handlebars.js/4.0.12/handlebars.min.js" type="text/javascript" ></script>
+    <script src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js" type="text/javascript"></script>
+    <script src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/template-web.js" type="text/javascript" ></script>
+    <script src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/h5-slider.js" type="text/javascript" ></script>
+    <script src="https://web-js-css-1255861081.cos.ap-chengdu.myqcloud.com/js/jweixin-1.4.0.js" type="text/javascript" ></script>
+    <!-- 加载动态js -->
+    <script src="js/common.js?_r_t=1.0.0" type="text/javascript" ></script>
+    <script src="js/config.js?_r_t=1.0.0" type="text/javascript" ></script>
+    <script src="js/shenfenzheng.js?_r_t=1.0.0" type="text/javascript" ></script>
+    <script src="js/all-param.js?_r_t=1.0.0" type="text/javascript" ></script>
+    <script src="js/wechat-driver-login.js?_r_t=1.0.0" type="text/javascript" ></script>
+    <script src="js/regular.js?_r_t=1.0.0" type="text/javascript" ></script>
+</head>
+<body>
+<!--template-background公共样式-->
+<div class="template-background">
+    <!--template-return公共样式-->
+    <div class="template-return" onclick="toIndex()">
+        <div class="head-logo">
+            <img src="img/head-logo.png">
+            <h5>智慧物流通</h5>
+        </div>
+    </div>
+</div>
+<!--template-background公共样式-->
+<div class="template-background">
+    <!--搜索框-->
+    <div class="weui-search-bar" id="searchBar">
+        <form class="weui-search-bar__form" id="search-form">
+            <div class="weui-search-bar__box">
+                <i class="weui-icon-search"></i>
+                <input type="text" class="weui-search-bar__input" id="searchInput" name="keyWords"
+                       placeholder="搜索"/>
+                <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+            </div>
+            <label class="weui-search-bar__label" id="searchText">
+                <i class="weui-icon-search"></i>
+                <span>搜索</span>
+            </label>
+        </form>
+        <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+    </div>
+    <!--时间排序-->
+    <div class="solt-wrapper">
+        <div class="solt-content">
+            <div class="sort-font">
+                <span>发布时间</span>
+                <div class="sort-img">
+                    <img src="img/descending-order.png">
+                </div>
+            </div>
+            <div class="sort-font sort-font-time">
+                <span>装货日期</span>
+                <div class="sort-img">
+                    <img src="img/descending-order.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--订单信息 模板填充位置-->
+    <div id="orderInfo"></div>
+
+    <!--抢单车辆 模板填充位置-->
+    <div id="dispatchInfo"></div>
+
+    <!--底部图片-->
+    <div class="index-foot">
+        <img src="img/index-foot.png">
+    </div>
+
+    <!--底部导航栏-->
+    <div class="weui-tabbar btn-fixed">
+        <a onclick="toDispatchList()" class="weui-tabbar__item">
+            <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+            <div class="weui-tabbar__icon">
+                <img src="img/index.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">主页</p>
+        </a>
+        <a onclick="toDispatchAdd()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/publish.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">发布</p>
+        </a>
+        <a onclick="toDispatchPersonal()" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <img src="img/driver-my.png" alt="">
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>
+
+</body>
+<script>
+    // 渲染订单信息
+    function renderOrderInfo(data) {
+        let sourceOrder = $('#order_info').html();
+        let templateOrder = Handlebars.compile(sourceOrder);
+        let htmlOrder = templateOrder({data: data});
+        $('#orderInfo').append(htmlOrder);
+    }
+
+    // 渲染运单信息
+    function renderDispatchInfoList(data) {
+        var html = template("dispatch_info", {data: data});
+        $('#dispatchInfo').append(html);
+    }
+
+    //跳转到运单详情
+    function toDoDispatch(id, oilCardNumber) {
+        store.set(allParam.DISPATCH_ID, id);
+        store.set(allParam.OIL_CARD_NUMBER, oilCardNumber);
+        window.location.href = 'dispatch_car_information.html';
+    }
+
+    //删除调派
+    function delDispatch(id) {
+        config.$ajax({
+            url: config.SERVICE_PATH + "/weChatDispatch/delDispatch",  //URL
+            data: {id: id},
+            method: config.POST,
+            dataType: 'json',
+            success: function (data) {
+                $.toast(data.msg);
+                window.location.href = "";
+            },
+            error: function (data) {
+                $.alert("系统繁忙，请稍后重试！" + data.message);
+            }
+        });
+    }
+
+    //操作按钮
+    function tool(data) {
+        if (data.dispatchStatus == -1) {
+            $.actions({
+                title: "选择操作",
+                actions: [
+                    {
+                        text: "确定发车",
+                        className: "color-primary",
+                        onClick: function () {
+                            toDoDispatch(data.id, data.oilCardNumber);
+                        },
+                    },
+                    {
+                        text: "联系司机",
+                        className: "color-warning",
+                        onClick: function () {
+                            window.location.href = "tel:" + data.driverPhone;
+                        }
+                    },
+                    {
+                        text: "移除抢单",
+                        className: "color-danger",
+                        onClick: function () {
+                            delDispatch(data.id);
+                        }
+                    }
+                ]
+            });
+        } else {
+            $.actions({
+                actions: [{
+                    text: "驾驶员:" + data.driverPhone,
+                    className: "color-primary",
+                    onClick: function () {
+                        window.location.href = "tel:" + data.driverPhone;
+                    }
+                }]
+            });
+        }
+    }
+
+    //搜素功能
+    $("#search-form").submit(function () {
+        config.$ajax({
+            url: config.SERVICE_PATH + "/weChatDispatch/getSearchorderInfos",
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function (result) {
+                if (result.data.length > 0) {
+                    $('#orderInfo').empty();
+                    renderOrderInfo(result.data);
+                } else {
+                    $.alert("没有搜到哦!!");
+                    $('#orderInfo').empty();
+                }
+            },
+            error: function (data) {
+                $.alert("系统繁忙，请稍后重试！" + data.code);
+            }
+        });
+        return false;
+    });
+
+    //获取运单列表
+    function getDispatchList() {
+        let orderId = store.get(allParam.ORDER_ID);
+        config.$ajax({
+            url: config.SERVICE_PATH + "/weChatDispatch/selectDispatchByOrderInfoId",  //URL
+            data: {orderInfoId: orderId},
+            method: config.POST,
+            dataType: 'json',
+            success: function (data) {
+                renderOrderInfo(data.data[0]);
+                renderDispatchInfoList(data.data[1]);
+            },
+            error: function (data) {
+                $.alert("系统繁忙，请稍后重试！" + data.message);
+            }
+        });
+    }
+
+    $(function () {
+        //初始化页面填充数据
+        getDispatchList();
+
+        //点击切换升降序
+        $(document).on('click', '.sort-font', function () {
+            let src = $(this).find("img").attr("src"); //获取图片地址
+            let ascending = "img/ascending-order.png"; //升序
+            let descending = "img/descending-order.png"; //降序
+            if (src === ascending) {
+                $(this).find("img").attr("src", descending); //变成降序
+            } else {
+                $(this).find("img").attr("src", ascending); //变成升序
+            }
+        });
+
+        /*点击了驾驶员，显示驾驶员详情*/
+        $(document).on('click', '.driver-car', function () {
+            let dispatchId = parseInt($(this).attr("dispatch-id"));
+            config.$ajax({
+                url: config.SERVICE_PATH + "/dispatchInfo/selectSelective",
+                data: {id: dispatchId},
+                method: config.POST,
+                dataType: 'json',
+                success: function (res) {
+                    if (res.success) {
+                        $("#popup").remove();
+                        $('body').append(template("driver_info", res.data));
+                        $("#popup").popup();
+                    } else {
+                        $.alert(data.msg);
+                    }
+                },
+                error: function (data) {
+                    $.alert("系统繁忙，请稍后重试！" + data.message);
+                }
+            });
+            return false;
+        });
+        /*点击已发车按钮，显示驾驶员详情*/
+        $(document).on('click', '.btn-car-click', function () {
+            let dispatchId = parseInt($(this).attr("dispatchList-id"));
+            config.$ajax({
+                url: config.SERVICE_PATH + "/dispatchInfo/selectDispatch",
+                data: {id: dispatchId},
+                method: config.POST,
+                dataType: 'json',
+                success: function (res) {
+                    if (res.success) {
+                        $("#popuplist").remove();
+                        $('body').append(template("driver_infoList", res.data));
+                        $("#popuplist").popup();
+                    } else {
+                        $.alert(data.msg);
+                    }
+                },
+                error: function (data) {
+                    $.alert("系统繁忙，请稍后重试！" + data.message);
+                }
+            });
+            return false;
+        });
+        // 复制驾驶员信息
+        let clipboard = new ClipboardJS('.copy-driver-info');
+        clipboard.on('success', function (e) {
+            $.toast("复制成功！");
+            e.clearSelection();
+        });
+
+    })
+</script>
+<!--订单信息模版-->
+<script id="order_info" type="text/x-handlebars-template">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__hd shipment-date">装货日期：<span>{{data.gmtStartTransport}}</span></div>
+        <div class="weui-panel__bd">
+            <div class="weui-media-box__hd">
+                <img class="weui-media-box__thumb small-img" src="img/starting_point.png">
+            </div>
+            <div class="weui-media-box__bd padding-bottom">
+                <h4 class="weui-media-box__title padding-line">{{data.lineStart}}</h4>
+            </div>
+            <div class="weui-media-box__hd">
+                <img class="weui-media-box__thumb small-img" src="img/destination.png">
+            </div>
+            <div class="weui-media-box__bd padding-bottom">
+                <h4 class="weui-media-box__title padding-line">{{data.lineEnd}}</h4>
+            </div>
+            <div class="weui-form-preview__bd">
+                <div class="weui-cell__bd">
+                    <label>报名车辆<span class="red-font">{{subtract data.carNumberRequired data.carNumberRest}}</span><i class="grey-font">/{{prettifyNumber data.carNumberRequired}}</i>辆车</label>
+                </div>
+                <div class="weui-cell__bd weui-form-preview__item">
+                    <label class="weui-form-preview__label">总数量：<span>{{data.totalTon}}</span>吨</label>
+                </div>
+            </div>
+            <div class="weui-media-box__hd">
+                <a onclick="toDispatchParticulars()" href="javascript:void(0);"
+                   class="weui-cell weui-cell_access weui-cell_link">
+                    <div class="weui-cell__bd">
+                        <label>查看详情</label>
+                    </div>
+                    <span class="weui-cell__ft"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--运单信息模版-->
+<script id="dispatch_info" type="text/html">
+    {{each data as item i}}
+    <div class="weui-panel">
+        <div class="weui-panel__hd">
+            <div class="car-start">
+                <div class="car-id driver-car" dispatch-id="{{item.id}}">
+                    <strong>{{item.carNumber}}</strong>
+                    <span class="pad10">{{item.driverName}}</span>
+                    <span>{{item.driverIdcard}}</span>
+                </div>
+            </div>
+            <div class="dispatch-cars-btn btn_click">
+                {{if item.dispatchStatus==-1}}
+                <button class="weui-btn btn-blues" onclick="tool({{ item}})">操作</button>
+                {{else}}
+                <button class="weui-btn btn-blues btn-gray btn-car-click" dispatchList-id="{{item.id}}">已发车
+                        <!--onclick="tool({{item.id}},{{item.dispatchStatus}},{{item.driverPhone}})">已发车-->
+                </button>
+                {{/if}}
+            </div>
+            <div class="weui-form-preview__item" style="margin-top: 10px;">
+                <label class="weui-form-preview__label">驾驶员载货吨位：<strong>{{$imports.prettifyNumber(item.deadweightTon)}}</strong> 吨</label>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+<!--驾驶员信息模板-->
+<script id="driver_info" type="text/html">
+    <div id="popup" class="weui-popup__container popup-bottom">
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal">
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <a href="javascript:;" class="picker-button close-popup">关闭</a>
+                    <a href="javascript:;" class="picker-button copy-driver-info"
+                       style="right: 60px;" data-clipboard-target="#base_driver_info">复制</a>
+                    <h1 class="title">驾驶员信息</h1>
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="weui-form-preview">
+                    <div class="weui-form-preview__bd">
+                        <div id="base_driver_info">
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 司机名字：</label>
+                                <span class="weui-form-preview__value">{{driverName}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 车牌号码：</label>
+                                <span class="weui-form-preview__value">{{carNumber}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 联系手机：</label>
+                                <span class="weui-form-preview__value">
+                                    <a href="tel:{{driverPhone}}" style="text-decoration: underline;color: #4D8AF0;">{{driverPhone}}</a>
+                                <span class="grey-font">（{{ driverPhone | mobileCallerloc }}）</span>
+                            </span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 身份证号：</label>
+                                <span class="weui-form-preview__value">{{driverIdcard}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 车识别码：</label>
+                                <span class="weui-form-preview__value">{{carIdcard}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 所属公司：</label>
+                                <span class="weui-form-preview__value">{{carOwner}}</span>
+                            </div>
+                        </div>
+                        <div class="weui-form-preview__item" style="margin-top: 1rem;">
+                            <label class="weui-form-preview__label"> 家庭住址：</label>
+                            <span class="weui-form-preview__value">{{ driverIdcard | cardFormArr }}</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label"> 收&nbsp;&nbsp;款&nbsp;&nbsp;人：</label>
+                            <span class="weui-form-preview__value">{{carAccountName}}</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label"> 开&nbsp;&nbsp;户&nbsp;&nbsp;行：</label>
+                            <span class="weui-form-preview__value">{{carAccountBank}}</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label"> 银行卡号：</label>
+                            <span class="weui-form-preview__value">{{carAccountNumber}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="driver_infoList" type="text/html">
+    <div id="popuplist" class="weui-popup__container popup-bottom">
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal">
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <a href="javascript:;" class="picker-button close-popup">关闭</a>
+                    <a href="javascript:;" class="picker-button copy-driver-info"
+                       style="right: 60px;" data-clipboard-target="#base_driver_info">复制</a>
+                    <h1 class="title">驾驶员信息</h1>
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="weui-form-preview">
+                    <div class="weui-form-preview__bd">
+                        <div id="base_driver_infoList">
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 发货吨位</label>
+                                <span class="weui-form-preview__value">{{transportTon}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 运费单价</label>
+                                <span class="weui-form-preview__value">{{unitPriceAmount}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 油卡号</label>
+                                <span class="weui-form-preview__value">{{oilCardNumber}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 油卡卡费</label>
+                                <span class="weui-form-preview__value">{{oilCardAmount}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 油卡充值费</label>
+                                <span class="weui-form-preview__value">{{oilAmount}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 信息费</label>
+                                <span class="weui-form-preview__value">{{informationFeeAmount}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 派车时间</label>
+                                <span class="weui-form-preview__value">{{gmtDispatch}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 追货宝使用单位</label>
+                                <span class="weui-form-preview__value">{{gpsCompany}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 追货宝编号</label>
+                                <span class="weui-form-preview__value">{{gpsNumber}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 追货宝租赁费</label>
+                                <span class="weui-form-preview__value">{{gpsCostAmount}}</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label"> 扫地费</label>
+                                <span class="weui-form-preview__value">{{sweepAmount}}</span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+</html>
